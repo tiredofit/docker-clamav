@@ -1,4 +1,4 @@
-FROM registry.selfdesign.org/docker/alpine:3.6
+FROM tiredofit/alpine:3.6
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Disable Features From Base Image
