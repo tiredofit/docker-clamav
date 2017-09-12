@@ -1,0 +1,22 @@
+#!/usr/bin/with-contenv bash
+
+while [ ! -f /tmp/state/10-clamd-init ]
+do
+  sleep 1
+done
+
+
+if [ ! -f /tmp/state/10-clamd ]; then
+
+### Set Debug Mode
+if [ "$DEBUG_MODE"="TRUE" ] || [ "$DEBUG_MODE"="true" ]; then
+	DEBUG_MODE="--debug" 
+fi
+
+
+  echo 'Initialization Complete' >/tmp/state/10-clamd
+fi
+
+echo ''
+echo '** Starting clamd'
+exec s6-setuidgid clamav clamd $DEBUG_MODE

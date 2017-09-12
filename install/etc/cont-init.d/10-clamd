@@ -1,0 +1,22 @@
+#!/usr/bin/with-contenv bash
+
+### Set Debug Mode
+if [ "$DEBUG_MODE"="TRUE" ] || [ "$DEBUG_MODE"="true" ]; then
+	DEBUG_MODE="--debug" 
+fi
+
+### Setup Persistent Storage
+if [ ! -d /data ]; then
+	mkdir -p /data
+        chown -R clamav:clamav /data
+fi
+
+### Check for Definitions
+if [ ! -f /data/main.cvd  ]; then
+        echo '** [clamav] No Definitions Found, Downloading..'
+	freshclam --user=clamav --verbose --show-progress --log=/var/log/clamav/freshclam.log $DEBUG_MODE
+fi
+
+
+mkdir -p /tmp/state
+touch /tmp/state/10-clamd-init
