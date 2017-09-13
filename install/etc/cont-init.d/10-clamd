@@ -8,8 +8,13 @@ fi
 ### Setup Persistent Storage
 if [ ! -d /data ]; then
 	mkdir -p /data
-        chown -R clamav:clamav /data
 fi
+        chown -R clamav:clamav /data
+
+
+### Setup Logs
+mkdir -p /var/log/clamav
+chown -R clamav:clamav /var/log/clamav
 
 ### Check for Definitions
 if [ ! -f /data/main.cvd  ]; then

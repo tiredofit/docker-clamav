@@ -1,10 +1,14 @@
-## 1.0 2017-09-12 Dave Conroy <dave at tiredofit.ca>
+## 1.1 2017-09-12 Dave Conroy <dave at tiredofit dot ca>
+
+* Permissions Fix
+
+## 1.0 2017-09-12 Dave Conroy <dave at tiredofit dot ca>
 
 * Initial Public Release
 * Alpine 3.6
 * Freshclam runs 6 times a day
 
-## 0.1 2017-09-12 Dave Conroy <dave at tiredofit.ca>
+## 0.1 2017-09-12 Dave Conroy <dave at tiredofit dot ca>
 
 * Initial _not working_ release
 
