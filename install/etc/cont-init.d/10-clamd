@@ -1,10 +1,11 @@
 #!/usr/bin/with-contenv bash
-set -x
+
 ### Set Debug Mode
 
 DEBUG_MODE=${DEBUG_MODE:-"FALSE"}
 
 if [[ "$DEBUG_MODE" = "TRUE" ]] && [[ "$DEBUG_MODE" = "true" ]]; then
+	set -x
 	DEBUG_ARG="--debug" 
 fi
 
