@@ -1,3 +1,7 @@
+## 1.2 2017-09-17 Dave Conroy <dave at tiredofit dot ca>
+
+* Debug Mode Tweak
+
 ## 1.1 2017-09-12 Dave Conroy <dave at tiredofit dot ca>
 
 * Permissions Fix

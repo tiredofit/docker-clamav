@@ -2,8 +2,7 @@ FROM tiredofit/alpine:3.6
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Disable Features From Base Image
-   ENV ENABLE_SMTP=false
-
+   ENV ENABLE_SMTP=FALSE
 ### Install Dependencies
    RUN apk update && \
        apk add --no-cache \

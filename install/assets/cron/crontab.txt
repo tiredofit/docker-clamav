@@ -1,7 +1,0 @@
-* 1 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1
-* 5 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1
-* 9 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1
-* 13 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1
-* 17 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1
-* 21 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1
-
