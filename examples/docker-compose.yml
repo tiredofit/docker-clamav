@@ -3,7 +3,7 @@ version: '2'
 services:
   
   clamav-app:
-    image: registry.selfdesign.org/docker/clamav
+    image: tiredofit/clamav
     container_name: clamav-app
     volumes:
     - ./data/clamav:/data
