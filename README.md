@@ -1,10 +1,17 @@
 # hub.docker.com/tiredofit/clamav
 
+
+[![Build Status](https://img.shields.io/docker/build/tiredofit/clamav.svg)](https://hub.docker.com/r/tiredofit/clamav)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/clamav.svg)](https://hub.docker.com/r/tiredofit/clamav)
+[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/clamav.svg)](https://hub.docker.com/r/tiredofit/clamav)
+[![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/clamav.svg)](https://microbadger.com/images/tiredofit/clamav)
+
+
 # Introduction
 
 Dockerfile to build an [Clam Antivirus](https://www.clamav.net) container image to scan files or most commonly, mail messages.
 
-* This Container uses a [customized Alpine base](https://hub.docker.com/r/tiredofit/debian) which includes [s6 overlay](https://github.com/just-containers/s6-overlay) enabled for PID 1 Init capabilities, [zabbix-agent](https://zabbix.org) for individual container monitoring, Cron also installed along with other tools (bash,curl, less, logrotate, nano, vim) for easier management. 
+* This Container uses a [customized Alpine base](https://hub.docker.com/r/tiredofit/alpine) which includes [s6 overlay](https://github.com/just-containers/s6-overlay) enabled for PID 1 Init capabilities, [zabbix-agent](https://zabbix.org) for individual container monitoring, Cron also installed along with other tools (bash,curl, less, logrotate, nano, vim) for easier management. 
 
 
 
