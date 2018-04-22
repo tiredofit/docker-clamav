@@ -1,3 +1,7 @@
+## 1.3 2017-12-01 Dave Conroy <dave at tiredofit.ca>
+
+* Base bump to Alpine 3.7
+
 ## 1.2 2017-09-17 Dave Conroy <dave at tiredofit dot ca>
 
 * Debug Mode Tweak
