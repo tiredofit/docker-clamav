@@ -1,21 +1,32 @@
-version: '2'
-
+version: '3.7'
 services:
   
   clamav-app:
-    image: tiredofit/clamav
+    image: registry.selfdesign.org/docker/clamav
     container_name: clamav-app
+    labels:
+    - traefik.enable=true
+    - traefik.frontend.rule=Host:clamav-app.example.com
+    - traefik.port=80
+    - traefik.protocol=http
+    - traefik.docker.network=proxy
+    - traefik.backend=clamav-app
     volumes:
     - ./data/clamav:/data
     - ./logs/clamav:/var/log/clamav
     environment:
     - ZABBIX_HOSTNAME=clamav-app
     networks:
-      - proxy-tier
+    - proxy
+    - internal
+    - services
     restart: always
 
 networks:
-  proxy-tier:
-    external:
-      name: nginx-proxy
+  proxy:
+    external: true
+  internal:
+    external: false
+  services:
+    external: true
 

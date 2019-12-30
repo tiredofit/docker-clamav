@@ -1,11 +1,12 @@
 #!/usr/bin/with-contenv bash
 
-### Set Debug Mode
+source /assets/functions/*
+PROCESS_NAME="clamav"
 
+### Set Debug Mode
 DEBUG_MODE=${DEBUG_MODE:-"FALSE"}
 
 if [[ "$DEBUG_MODE" = "TRUE" ]] && [[ "$DEBUG_MODE" = "true" ]]; then
-	set -x
 	DEBUG_ARG="--debug" 
 fi
 
@@ -14,7 +15,7 @@ if [ ! -d /data ]; then
 	mkdir -p /data
 fi
 
-    chown -R clamav:clamav /data
+chown -R clamav:clamav /data
 
 ### Setup Cron
 echo '* 1 * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log $DEBUG_ARG >/dev/null 2>&1' >>/assets/cron/crontab.txt
@@ -30,10 +31,8 @@ chown -R clamav:clamav /var/log/clamav
 
 ### Check for Definitions
 if [ ! -f /data/main.cvd  ]; then
-        echo '** [clamav] No Definitions Found, Downloading..'
+    print_warn "No Definitions Found, Downloading.."
 	freshclam --user=clamav --verbose --show-progress --log=/var/log/clamav/freshclam.log $DEBUG_ARG
 fi
 
-
-mkdir -p /tmp/state
-touch /tmp/state/10-clamd-init
+liftoff
