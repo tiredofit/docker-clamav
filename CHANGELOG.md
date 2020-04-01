@@ -1,3 +1,8 @@
+## 1.6.2 2020-04-01 <cauger@github>
+
+   ### Changed
+      - Fixed cron expression to not run definitions update every minute
+
 ## 1.6.1 2020-01-02 <dave at tiredofit dot ca>
 
    ### Changed
