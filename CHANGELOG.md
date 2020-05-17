@@ -1,3 +1,12 @@
+## 2.0.0 2020-05-17 <dave at tiredofit dot ca>
+
+   ### Added
+      - Rewrote entire image
+      - Alpine Edge
+      - All parameters configurable with auto config generation
+      - Reworked Definitions Updating Routings to be ultra configurable
+
+
 ## 1.6.2 2020-04-01 <cauger@github>
 
    ### Changed

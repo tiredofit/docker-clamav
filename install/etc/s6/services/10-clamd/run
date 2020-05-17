@@ -7,12 +7,5 @@ check_container_initialized
 check_service_initialized init
 liftoff
 
-### Set Debug Mode
-if [ "$DEBUG_MODE"="TRUE" ] || [ "$DEBUG_MODE"="true" ]; then
-	DEBUG_MODE="--debug" 
-fi
-
-liftoff
-
 print_info "Starting ClamAV"
-exec s6-setuidgid clamav clamd $DEBUG_MODE
+clamd --config-file ${CONFIG_LOCATION}${CLAMD_CONFIG_FILE} ${debug_arg}
