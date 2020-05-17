@@ -87,11 +87,11 @@ Along with the Environment Variables from the [Base image](https://hub.docker.co
 | `CLAMD_LOCAL_SOCKET` | Clamd Socket Name - Default: `/run/clamd/clamd.sock` |
 | `CLAMD_TEMP_LOCATION` | CLamd Temp Location - Default: `/tmp/clamd/` |
 | `DATA_LOCATION` | Base Folder for Data Files - Default: `/data/` |
-| `CONFIG_LOCATION` | Folder for Config Files - Default: `${DATA_LOCATION}|/config/` |
-| `DEFINITIONS_LOCATION` | Folder for Virus Definitions - Default: `${DATA_LOCATION` |definitions/` |
+| `CONFIG_LOCATION` | Folder for Config Files - Default: `${DATA_LOCATION}/config/` |
+| `DEFINITIONS_LOCATION` | Folder for Virus Definitions - Default: `${DATA_LOCATION`/definitions/` |
 | `ENABLE_CLAMD` | Enable ClamD Daemon - Default: `TRUE` |
 | `ENABLE_LOG_CLAMD` | Enable Logging for Clamd - Default: `TRUE` |
-| `ENABLE_LOG_FRESHCLAM` | Enable Logging for Definitions Updaer - Default: `
+| `ENABLE_LOG_FRESHCLAM` | Enable Logging for Definitions Updaer - Default: `TRUE` |
 | `FRESHCLAM_CONFIG_FILE` | Freshclam Definitions Updater configuration file - Default: `freshclam.conf` |
 | `LISTEN_PORT` | ClamD TCP Socket Listen port - Default: `3310` |
 | `LOG_CLAMD_FILE` | ClamD Log File - Default: `clamd.log` |
@@ -118,7 +118,6 @@ Along with the Environment Variables from the [Base image](https://hub.docker.co
 | `ENABLE_ALGORITHMIC_DETECTION` | Enable Algorithmic Detection - Default: `TRUE` |
 | `ENABLE_BYTECODE` | Enable Bytecode Checks - Default: `TRUE` |
 | `ENABLE_DETECT_PUA` | Detect PUA - Default: `TRUE` |
-TRUE` |
 | `ENABLE_PHISHING_SCAN_URLS` | Scan URLs for Phishing - Default: `TRUE` |
 | `ENABLE_PHISHING_SIGNATURES` | Scan for signatures related to Phishing - Default: `TRUE` |
 | `ENABLE_SCAN_ARCHIVE` | Scan Archives - Default: `TRUE` |
@@ -130,7 +129,7 @@ TRUE` |
 | `ENABLE_SCAN_PE` | Scan PE Files - Default: `TRUE` |
 | `ENABLE_SCAN_SWF` | Scan SWF Files - Default: `TRUE` |
 | `EXCLUDE_PUA` | Comma Seperated Values of PUA formats to exclude - Default: `NetTool,PWTool` |
-| `INCLUDE_PUA` | Comma Seperated Values of PUA formats to exclude - Default: `` |
+| `INCLUDE_PUA` | Comma Seperated Values of PUA formats to exclude - Default: `(null)` |
 
 *Scanning Limits*
 
