@@ -1,3 +1,9 @@
+## 2.0.1 2020-06-08 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update to support changes in tiredofit/alpine base
+
+
 ## 2.0.0 2020-05-17 <dave at tiredofit dot ca>
 
    ### Added
