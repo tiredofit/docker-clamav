@@ -1,3 +1,9 @@
+## 2.0.2 2020-06-15 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Bugfix for 2.0.1 Release
+
+
 ## 2.0.1 2020-06-08 <dave at tiredofit dot ca>
 
    ### Added

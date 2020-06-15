@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 
 source /assets/functions/00-container
-prepare_service defaults single
+prepare_service defaults 10-clamav
 PROCESS_NAME="clamav"
 
 check_container_initialized
