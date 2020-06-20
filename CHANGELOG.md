@@ -1,3 +1,9 @@
+## 2.0.3 2020-06-20 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for logrotate not sending SIGHUP properly and removed extra logroate config
+
+
 ## 2.0.2 2020-06-15 <dave at tiredofit dot ca>
 
    ### Changed

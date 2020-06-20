@@ -14,6 +14,7 @@ RUN set -x && \
               && \
     \
 ### Cleanup
+    rm -rf /etc/logrotate.d/* && \
     rm -rf /var/cache/apk/*
 
 ### Networking Configuration
