@@ -9,4 +9,4 @@ check_service_initialized init
 liftoff
 
 print_info "Starting ClamAV"
-clamd --config-file ${CONFIG_LOCATION}${CLAMD_CONFIG_FILE} ${debug_arg}
+clamd --config-file "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}" ${debug_arg}

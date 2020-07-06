@@ -17,7 +17,7 @@ elif [ "$1" = "NOW" ]; then
 fi
 
 ### Container Startup
-print_notice "Definitions Updating Routines Initialized on `date`"
+print_notice "Definitions Updating Routines Initialized on $(date)"
 
 ### Wait for Next time to start backup
   current_time=$(date +"%s")
@@ -37,7 +37,7 @@ print_notice "Definitions Updating Routines Initialized on `date`"
 
   while true; do
     print_info "Downloading Latest Definitions"
-  	silent freshclam -F --config-file=${CONFIG_LOCATION}${FRESHCLAM_CONFIG_FILE} --daemon-notify ${CONFIG_LOCATION}${CLAMD_CONFIG_FILE} ${log_verbose} ${freshclam_log} ${debug_arg}
+  	silent freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" --daemon-notify "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
 ### Go back to Sleep until next definitions update time
    if [ "$MANUAL" = "TRUE" ]; then
         exit 0;

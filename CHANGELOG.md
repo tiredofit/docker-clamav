@@ -1,3 +1,12 @@
+## 2.0.4 2020-07-06 <dave at tiredofit dot ca>
+
+   ### Added
+      - Added symbolic link from /var/lib/clamav to ${DEFINITIONS_LOCATION} to quiet down any errors running manual scans with clamscan
+
+   ### Changed
+      - Cleaned up code as per shellcheck warnings
+
+
 ## 2.0.3 2020-06-20 <dave at tiredofit dot ca>
 
    ### Changed

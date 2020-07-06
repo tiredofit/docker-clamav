@@ -1,18 +1,18 @@
 #!/usr/bin/with-contenv bash
 
-if var_true ${LOG_VERBOSE} ; then
+if var_true "${LOG_VERBOSE}" ; then
     conf_log_verbose="LogVerbose yes"
     log_verbose="--verbose"
 fi
 
-if var_true ${ENABLE_LOG_FRESHCLAM} ; then
+if var_true "${ENABLE_LOG_FRESHCLAM}" ; then
     freshclam_log="--log=${LOG_LOCATION}${LOG_FRESHCLAM_FILE}"
 fi
 
-if var_true ${ENABLE_LOG_CLAMD} ; then
+if var_true "${ENABLE_LOG_CLAMD}" ; then
     clamd_log="--log=${LOG_LOCATION}${LOG_CLAMD_FILE}"
 fi
 
 if var_true DEBUG_MODE ; then
-    debug_arg="--debug" 
+    debug_arg="--debug"
 fi

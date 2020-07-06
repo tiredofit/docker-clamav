@@ -5,52 +5,54 @@ prepare_service
 PROCESS_NAME="clamav"
 
 ### Image Routines
-if var_false ${ENABLE_CLAMD} ; then
+if var_false "${ENABLE_CLAMD}" ; then
 	print_info "Disabling ClamD from running - This image is only suitable for manual scanning in this state"
 	service-stop 10-clamd
 fi
 
-if var_false ${ENABLE_DEFINITIONS_UPDATE} ; then
+if var_false "${ENABLE_DEFINITIONS_UPDATE}" ; then
 	print_info "Disabling Definitions from being automatically updated"
 	service-stop 20-freshclam
 fi
 
 ### Setup Persistent Storage
 #### Definitions
-if [ ! -d ${DEFINITIONS_LOCATION} ]; then
+if [ ! -d "${DEFINITIONS_LOCATION}" ]; then
 	print_debug "Detected First Time Install"
-	mkdir -p ${DEFINITIONS_LOCATION}
+	mkdir -p "${DEFINITIONS_LOCATION}"
 fi
-chown -R clamav:clamav ${DEFINITIONS_LOCATION}
+rm -rf /var/lib/clamav
+ln -sf "${DEFINITIONS_LOCATION}" /var/lib/clamav
+chown -R clamav:clamav "${DEFINITIONS_LOCATION}"
 
 #### Logging
-if var_true ${ENABLE_LOG_CLAMD} || var_true ${ENABLE_LOG_FRESHCLAM} ; then
+if var_true "${ENABLE_LOG_CLAMD}" || var_true "${ENABLE_LOG_FRESHCLAM}" ; then
 	print_notice "Configuring Logging"
-	if [ ! -d ${LOG_LOCATION} ]; then
+	if [ ! -d "${LOG_LOCATION}" ]; then
 		print_debug "Setting up Logging Directory"
-    	mkdir -p ${LOG_LOCATION}
+    	mkdir -p "${LOG_LOCATION}"
 	fi
     sed -i "s#<LOG_LOCATION>#${LOG_LOCATION}#g" /etc/logrotate.d/clamav
-	chown -R clamav:clamav ${LOG_LOCATION}
+	chown -R clamav:clamav "${LOG_LOCATION}"
 fi
 
 #### Configuration
-if [ ! -f ${CONFIG_LOCATION}${CLAMD_CONFIG_FILE} ] || [ ! -f ${CONFIG_LOCATION}${FRESHCLAM_CONFIG_FILE} ] ; then
-	mkdir -p ${CONFIG_LOCATION}
+if [ ! -f "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}" ] || [ ! -f "${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" ] ; then
+	mkdir -p "${CONFIG_LOCATION}"
 	print_info "Setting up Configuration for the first time"
 	SETUP_MODE=AUTO
 fi
 
 #### Socket Configuration
-if [ ! -d $(dirname ${CLAMD_LOCAL_SOCKET}) ] ; then
-	mkdir -p $(dirname ${CLAMD_LOCAL_SOCKET})
-	chown -R clamav:clamav $(dirname ${CLAMD_LOCAL_SOCKET})
+if [ ! -d $(dirname "${CLAMD_LOCAL_SOCKET}") ] ; then
+	mkdir -p $(dirname "${CLAMD_LOCAL_SOCKET}")
+	chown -R clamav:clamav $(dirname "${CLAMD_LOCAL_SOCKET}")
 fi
 
 #### Temp Files Configuration
-if [ ! -d ${CLAMD_TEMP_LOCATION} ] ; then
-	mkdir -p ${CLAMD_TEMP_LOCATION}
-	chown -R clamav:clamav ${CLAMD_TEMP_LOCATION}
+if [ ! -d "${CLAMD_TEMP_LOCATION}" ] ; then
+	mkdir -p "${CLAMD_TEMP_LOCATION}"
+	chown -R clamav:clamav "${CLAMD_TEMP_LOCATION}"
 fi
 
 if [ "$SETUP_TYPE" = "AUTO" ]; then
@@ -68,7 +70,7 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 	truefalse_yesno ENABLE_SCAN_PDF
 	truefalse_yesno ENABLE_SCAN_PE
 	truefalse_yesno ENABLE_SCAN_SWF
-	exclude_pua_array=$(echo $EXCLUDE_PUA | tr "," "\n")
+	exclude_pua_array=$(echo "$EXCLUDE_PUA" | tr "," "\n")
 		for pua in $exclude_pua_array
 		do
     		excluded_pua=${excluded_pua}$(cat <<EOF
@@ -77,7 +79,7 @@ EOF
 		)
 	done
 
-	include_pua_array=$(echo $INCLUDE_PUA | tr "," "\n")
+	include_pua_array=$(echo "$INCLUDE_PUA" | tr "," "\n")
 		for pua in $include_pua_array
 		do
     		included_pua=${included_pua}$(cat <<EOF
@@ -87,10 +89,10 @@ EOF
 	done
 
     print_notice "Generating Configuration for Clam Antivirus"
-	cat <<EOF > ${CONFIG_LOCATION}${CLAMD_CONFIG_FILE}
+	cat <<EOF > "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}"
 ## Custom Generated Clam Antivirus Configuration! Do not edit, instead set ENV Vars
 ## If you want to use your own configuration files set SETUP_TYPE=MANUAL when starting container
-## Last Generated on `date`
+## Last Generated on $(date)
 
 ###############
 # General
@@ -99,7 +101,7 @@ EOF
 User clamav
 Foreground yes
 LocalSocket ${CLAMD_LOCAL_SOCKET}
-PidFile `dirname ${CLAMD_LOCAL_SOCKET}`/clamd.pid
+PidFile $(dirname "${CLAMD_LOCAL_SOCKET}")/clamd.pid
 TCPSocket ${LISTEN_PORT}
 DatabaseDirectory ${DEFINITIONS_LOCATION}
 TemporaryDirectory ${CLAMD_TEMP_LOCATION}
@@ -157,12 +159,12 @@ PCREMaxFileSize ${PCRE_MAX_FILE_SIZE}
 EOF
 
     print_notice "Generating Configuration for Definitions Updater"
-	cat <<EOF > ${CONFIG_LOCATION}${FRESHCLAM_CONFIG_FILE}
+	cat <<EOF > "${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}"
 ## Custom Generated Freshclam Configuration! Do not edit, instead set ENV Vars
 ## If you want to use your own configuration files set SETUP_TYPE=MANUAL when starting container
-## Last Generated on `date`
+## Last Generated on $(date)
 DatabaseOwner clamav
-PidFile `dirname ${CLAMD_LOCAL_SOCKET}`/freshclam.pid
+PidFile $(dirname "${CLAMD_LOCAL_SOCKET}")/freshclam.pid
 DatabaseDirectory ${DEFINITIONS_LOCATION}
 DatabaseMirror database.clamav.net
 ScriptedUpdates yes
@@ -172,12 +174,12 @@ EOF
 else
 	print_notice "Manual Configuration Mode selected"
 fi
-chown -R clamav:clamav ${CONFIG_LOCATION}
+chown -R clamav:clamav "${CONFIG_LOCATION}"
 
 ### Check for Definitions
-if [ ! -f ${DEFINITIONS_LOCATION}main.cvd  ]; then
+if [ ! -f "${DEFINITIONS_LOCATION}"main.cvd  ]; then
     print_warn "No Virus Definitions Found! Downloading.."
-	freshclam -F --config-file=${CONFIG_LOCATION}${FRESHCLAM_CONFIG_FILE} ${log_verbose} ${freshclam_log} ${debug_arg}
+	freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
 fi
 
 print_info "Container Initialization Complete"
