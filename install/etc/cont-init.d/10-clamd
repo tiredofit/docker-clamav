@@ -182,5 +182,7 @@ if [ ! -f "${DEFINITIONS_LOCATION}"main.cvd  ]; then
 	freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
 fi
 
+echo "alias clamscan='clamscan -d ${DEFINITIONS_LOCATION}'" > /root/.bashrc
+
 print_info "Container Initialization Complete"
 liftoff

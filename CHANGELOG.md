@@ -1,3 +1,9 @@
+## 2.0.5 2020-07-31 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add alias for clamscan to pull from $DEFINITIONS_LOCATION instead of /var/lib/clamav
+
+
 ## 2.0.4 2020-07-06 <dave at tiredofit dot ca>
 
    ### Added
