@@ -1,3 +1,8 @@
+## 2.0.6 2020-09-11 <marxjohnson@gitub>
+
+   ### Added
+      - Add STREAM_MAX_SIZE environment variable for proper size limiting of scanning
+
 ## 2.0.5 2020-07-31 <dave at tiredofit dot ca>
 
    ### Added
