@@ -156,6 +156,7 @@ MaxRecHWP3 ${MAX_RECHWP3}
 PCREMatchLimit ${PCRE_MATCH_LIMIT}
 PCRERecMatchLimit ${PCRE_RECMATCH_LIMIT}
 PCREMaxFileSize ${PCRE_MAX_FILE_SIZE}
+StreamMaxLength ${STREAM_MAX_LENGTH}
 EOF
 
     print_notice "Generating Configuration for Definitions Updater"

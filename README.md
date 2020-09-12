@@ -153,6 +153,7 @@ Along with the Environment Variables from the [Base image](https://hub.docker.co
 | `PCRE_MATCH_LIMIT`    | PCRE Match Limit          | `10000` |
 | `PCRE_MAX_FILE_SIZE`  | PCRE Max File Size        | `25M`   |
 | `PCRE_RECMATCH_LIMIT` | PCRE REcursive Max Limit  | `2000`  |
+| `STREAM_MAX_LENGTH`   | Max stream size to scan   | `25M`   |
 
 ### Networking
 
