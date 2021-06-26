@@ -1,5 +1,5 @@
 FROM tiredofit/alpine:edge
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Disable Features From Base Image
 ENV ENABLE_SMTP=FALSE

@@ -116,8 +116,8 @@ ${conf_log_verbose}
 ###############
 
 DetectPUA ${ENABLE_DETECT_PUA}
-${exclude_pua}
-${include_pua}
+${excluded_pua}
+${includef_pua}
 AlgorithmicDetection ${ENABLE_ALGORITHMIC_DETECTION}
 Bytecode ${ENABLE_BYTECODE}
 

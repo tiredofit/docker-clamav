@@ -1,3 +1,9 @@
+## 2.1.0 2021-06-25 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for Included and Excluded PUA
+
+
 ## 2.0.6 2020-09-11 <marxjohnson@gitub>
 
    ### Added

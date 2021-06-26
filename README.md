@@ -57,7 +57,7 @@ Dockerfile to build an [Clam Antivirus](https://www.clamav.net) to scan files or
 ## Installation
 
 ### Build from Source
-Clone this repository and build the image with `docker build <arguments> (imagename) .`
+Clone this repository and build the image with `docker build -t (imagename) .`
 
 ### Prebuilt Images
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/clamav) and is the recommended method of installation.
@@ -66,7 +66,7 @@ Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tired
 docker pull tiredofit/clamav:(imagetag)
 ```
 
-The following image tags are available along with their taged release based on what's written in the [Changelog](CHANGELOG.md):
+The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
 | Container OS | Tag       |
 | ------------ | --------- |
