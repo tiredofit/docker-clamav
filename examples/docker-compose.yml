@@ -1,8 +1,8 @@
-version: '3.7'
+version: '2.4'
 services:
   
   clamav-app:
-    image: tiredofit/clamav
+    image: tiredofit/clamav:latest
     container_name: clamav-app
     volumes:
       - ./data:/data
@@ -10,8 +10,6 @@ services:
     environment:
       - ZABBIX_HOSTNAME=clamav-app
       - DEFINITIONS_UPDATE_FREQUENCY=60
-      - DEBUG_MODE=TRUE
-      - EXCLUDE_PUA=Win,Packed
     networks:
       - services
     restart: always
