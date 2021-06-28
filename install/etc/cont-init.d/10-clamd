@@ -74,7 +74,8 @@ if [ "$SETUP_TYPE" = "AUTO" ]; then
 		for pua in $exclude_pua_array
 		do
     		excluded_pua=${excluded_pua}$(cat <<EOF
-excludePUA ${pua}
+
+ExcludePUA ${pua}
 EOF
 		)
 	done
@@ -83,6 +84,7 @@ EOF
 		for pua in $include_pua_array
 		do
     		included_pua=${included_pua}$(cat <<EOF
+
 IncluddePUA ${pua}
 EOF
 		)
@@ -117,7 +119,7 @@ ${conf_log_verbose}
 
 DetectPUA ${ENABLE_DETECT_PUA}
 ${excluded_pua}
-${includef_pua}
+${included_pua}
 AlgorithmicDetection ${ENABLE_ALGORITHMIC_DETECTION}
 Bytecode ${ENABLE_BYTECODE}
 

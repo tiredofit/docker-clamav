@@ -10,6 +10,8 @@ services:
     environment:
       - ZABBIX_HOSTNAME=clamav-app
       - DEFINITIONS_UPDATE_FREQUENCY=60
+      - DEBUG_MODE=TRUE
+      - EXCLUDE_PUA=Win,Packed
     networks:
       - services
     restart: always

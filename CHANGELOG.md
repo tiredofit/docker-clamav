@@ -1,3 +1,9 @@
+## 2.1.1 2021-06-28 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for 2.1.0 - Excluded PUA was not creating a new line properly
+
+
 ## 2.1.0 2021-06-25 <dave at tiredofit dot ca>
 
    ### Changed
