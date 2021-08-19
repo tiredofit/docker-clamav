@@ -85,7 +85,7 @@ EOF
 		do
     		included_pua=${included_pua}$(cat <<EOF
 
-IncluddePUA ${pua}
+IncludePUA ${pua}
 EOF
 		)
 	done
