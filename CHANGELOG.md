@@ -1,3 +1,8 @@
+## 2.1.2 2021-06-28 <scopaala@github>
+
+   ### Changed
+      - Fix for 2.1.0 - Included PUA had a spelling mistake
+
 ## 2.1.1 2021-06-28 <dave at tiredofit dot ca>
 
    ### Changed

@@ -2,7 +2,7 @@ FROM tiredofit/alpine:edge
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Disable Features From Base Image
-ENV ENABLE_SMTP=FALSE
+ENV CONTAINER_ENABLE_MESSAGING=FALSE
 
 ### Install Dependencies
 RUN set -x && \
