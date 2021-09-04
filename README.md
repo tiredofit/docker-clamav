@@ -123,9 +123,9 @@ Be sure to view the following repositories to understand all the customizable op
 | `ENABLE_LOG_FRESHCLAM`  | Enable Logging for Definitions Updaer                                  | `TRUE`                          |
 | `FRESHCLAM_CONFIG_FILE` | Freshclam Definitions Updater configuration file                       | `freshclam.conf`                |
 | `LISTEN_PORT`           | ClamD TCP Socket Listen port                                           | `3310`                          |
-| `LOG_CLAMD_FILE`        | ClamD Log File                                                         | `clamd.log`                     |
-| `LOG_FRESHCLAM_FILE`    | Freshclam Log File                                                     | `freshclam.log`                 |
-| `LOG_LOCATION`          | Logfile locations                                                      | `/logs/`                        |
+| `LOG_FILE_CLAMD`        | ClamD Log File                                                         | `clamd.log`                     |
+| `LOG_FILE_FRESHCLAM`    | Freshclam Log File                                                     | `freshclam.log`                 |
+| `LOG_PATH`              | Logfile locations                                                      | `/logs/`                        |
 | `LOG_VERBOSE`           | Enable Verbosity in Logs                                               | `FALSE`                         |
 
 

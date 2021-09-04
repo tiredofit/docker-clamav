@@ -1,3 +1,10 @@
+## 2.2.0 2021-09-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change LOG environment variables (LOG_LOCATION -> LOG_PATH) (LOG_*_FILE -> LOG_FILE_*)
+      - Change the way logrotation is configured for regex parsing
+
+
 ## 2.1.2 2021-06-28 <scopaala@github>
 
    ### Changed

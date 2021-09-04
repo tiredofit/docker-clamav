@@ -28,12 +28,21 @@ chown -R clamav:clamav "${DEFINITIONS_LOCATION}"
 #### Logging
 if var_true "${ENABLE_LOG_CLAMD}" || var_true "${ENABLE_LOG_FRESHCLAM}" ; then
 	print_notice "Configuring Logging"
-	if [ ! -d "${LOG_LOCATION}" ]; then
+	if [ ! -d "${LOG_PATH}" ]; then
 		print_debug "Setting up Logging Directory"
-    	mkdir -p "${LOG_LOCATION}"
+    	mkdir -p "${LOG_PATH}"
 	fi
-    sed -i "s#<LOG_LOCATION>#${LOG_LOCATION}#g" /etc/logrotate.d/clamav
-	chown -R clamav:clamav "${LOG_LOCATION}"
+	if var_true "${ENABLE_LOG_CLAMD}" ; then
+    	create_logrotate clamav ${LOG_PATH}/${LOG_FILE_CLAMD} none clamav clamav
+		touch ${LOG_PATH}/${LOG_FILE_CLAMD}
+	fi
+
+	if var_true "${ENABLE_LOG_CLAMD}" ; then
+		create_logrotate freshclam ${LOG_PATH}/${LOG_FILE_FRESHCLAM} none clamav clamav
+		touch ${LOG_PATH}/${LOG_FILE_FRESHCLAM}
+	fi
+
+	chown -R clamav:clamav "${LOG_PATH}"
 fi
 
 #### Configuration
@@ -108,7 +117,7 @@ TCPSocket ${LISTEN_PORT}
 DatabaseDirectory ${DEFINITIONS_LOCATION}
 TemporaryDirectory ${CLAMD_TEMP_LOCATION}
 MaxThreads ${MAX_THREADS}
-LogFile ${LOG_LOCATION}${LOG_CLAMD_FILE}
+LogFile ${LOG_PATH}${LOG_CLAMD_FILE}
 LogFileUnlock yes
 LogTime yes
 ${conf_log_verbose}
