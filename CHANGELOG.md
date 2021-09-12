@@ -1,3 +1,9 @@
+## 2.2.1 2021-09-12 <morgenroth@github>
+
+   ## Fixed
+      - Fix for 2.2.0 release where defaults weren't appropriately set
+
+
 ## 2.2.0 2021-09-04 <dave at tiredofit dot ca>
 
    ### Changed

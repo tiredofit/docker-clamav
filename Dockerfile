@@ -1,4 +1,4 @@
-FROM tiredofit/alpine:edge
+FROM docker.io/tiredofit/alpine:edge
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ### Disable Features From Base Image
