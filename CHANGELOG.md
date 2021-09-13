@@ -1,3 +1,9 @@
+## 2.2.2 2021-09-13 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for 2.2.0 still not writing correct log files
+
+
 ## 2.2.1 2021-09-12 <morgenroth@github>
 
    ## Fixed

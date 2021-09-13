@@ -117,7 +117,7 @@ TCPSocket ${LISTEN_PORT}
 DatabaseDirectory ${DEFINITIONS_LOCATION}
 TemporaryDirectory ${CLAMD_TEMP_LOCATION}
 MaxThreads ${MAX_THREADS}
-LogFile ${LOG_PATH}${LOG_CLAMD_FILE}
+LogFile ${LOG_PATH}/${LOG_FILE_CLAMD}
 LogFileUnlock yes
 LogTime yes
 ${conf_log_verbose}

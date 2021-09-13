@@ -6,11 +6,11 @@ if var_true "${LOG_VERBOSE}" ; then
 fi
 
 if var_true "${ENABLE_LOG_FRESHCLAM}" ; then
-    freshclam_log="--log=${LOG_PATH}${LOG_FILE_FRESHCLAM}"
+    freshclam_log="--log=${LOG_PATH}/${LOG_FILE_FRESHCLAM}"
 fi
 
 if var_true "${ENABLE_LOG_CLAMD}" ; then
-    clamd_log="--log=${LOG_PATH}${LOG_FILE_CLAMD}"
+    clamd_log="--log=${LOG_PATH}/${LOG_FILE_CLAMD}"
 fi
 
 if var_true DEBUG_MODE ; then
