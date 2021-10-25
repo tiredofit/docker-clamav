@@ -33,12 +33,12 @@ if var_true "${ENABLE_LOG_CLAMD}" || var_true "${ENABLE_LOG_FRESHCLAM}" ; then
     	mkdir -p "${LOG_PATH}"
 	fi
 	if var_true "${ENABLE_LOG_CLAMD}" ; then
-    	create_logrotate clamav ${LOG_PATH}/${LOG_FILE_CLAMD} none clamav clamav
+    	create_logrotate clamav ${LOG_PATH}/${LOG_FILE_CLAMD} clamav clamav clamav
 		touch ${LOG_PATH}/${LOG_FILE_CLAMD}
 	fi
 
 	if var_true "${ENABLE_LOG_CLAMD}" ; then
-		create_logrotate freshclam ${LOG_PATH}/${LOG_FILE_FRESHCLAM} none clamav clamav
+		create_logrotate freshclam ${LOG_PATH}/${LOG_FILE_FRESHCLAM} freshclam clamav clamav
 		touch ${LOG_PATH}/${LOG_FILE_FRESHCLAM}
 	fi
 
@@ -103,7 +103,7 @@ EOF
 	cat <<EOF > "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}"
 ## Custom Generated Clam Antivirus Configuration! Do not edit, instead set ENV Vars
 ## If you want to use your own configuration files set SETUP_TYPE=MANUAL when starting container
-## Last Generated on $(date)
+## Last Generated on $(TZ=${TIMEZONE} date +'%Y-%m-%d %H:%M:%S %Z')
 
 ###############
 # General
@@ -191,7 +191,7 @@ chown -R clamav:clamav "${CONFIG_LOCATION}"
 ### Check for Definitions
 if [ ! -f "${DEFINITIONS_LOCATION}"main.cvd  ]; then
     print_warn "No Virus Definitions Found! Downloading.."
-	freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
+	silent freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
 fi
 
 echo "alias clamscan='clamscan -d ${DEFINITIONS_LOCATION}'" > /root/.bashrc
