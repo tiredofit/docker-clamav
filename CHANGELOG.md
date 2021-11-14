@@ -1,3 +1,8 @@
+## 2.3.0 2021-10-25 <ccorbacho@github>
+
+   ### Added
+      - Add settings for alerting options (encrypted files, size exceeded)
+
 ## 2.2.3 2021-10-25 <dave at tiredofit dot ca>
 
    ### Added
