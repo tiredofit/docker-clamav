@@ -168,6 +168,14 @@ PCREMatchLimit ${PCRE_MATCH_LIMIT}
 PCRERecMatchLimit ${PCRE_RECMATCH_LIMIT}
 PCREMaxFileSize ${PCRE_MAX_FILE_SIZE}
 StreamMaxLength ${STREAM_MAX_LENGTH}
+
+###############
+# Alert Options
+###############
+AlertEncryptedArchive ${ENABLE_ALERT_ENCRYPTED_ARCHIVE}
+AlertEncryptedDoc ${ENABLE_ALERT_ENCRYPTED_DOC}
+AlertOLE2Macros ${ENABLE_ALERT_OLE2_MACROS}
+AlertExceedsMax ${ENABLE_ALERT_EXCEEDS_MAX}
 EOF
 
     print_notice "Generating Configuration for Definitions Updater"
