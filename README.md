@@ -182,6 +182,16 @@ Be sure to view the following repositories to understand all the customizable op
 | `PCRE_RECMATCH_LIMIT` | PCRE REcursive Max Limit  | `2000`  |
 | `STREAM_MAX_LENGTH`   | Max stream size to scan   | `25M`   |
 
+#### Alerting Settings
+
+| Parameter                        | Description                                                        | Default |
+| -------------------------------- | ------------------------------------------------------------------ | ------- |
+| `ENABLE_ALERT_ENCRYPTED_ARCHIVE` | Alert on encrypted archives (.zip, .7zip, .rar)                    | `FALSE` |
+| `ENABLE_ALERT_ENCRYPTED_DOC`     | Alert on encrypted documents (.pdf)                                | `FALSE` |
+| `ENABLE_ALERT_OLE2_MACROS`       | Alert on OLE2 files containing VBA macros                          | `FALSE` |
+| `ENABLE_ALERT_EXCEEDS_MAX`       | Alert on files exceeding MAX_FILES, MAX_SCAN_SIZE or MAX_RECURSION | `FALSE` |
+
+
 ### Networking
 
 | Port   | Description          |
