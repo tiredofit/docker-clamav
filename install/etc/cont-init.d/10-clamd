@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 source /assets/functions/00-container
 prepare_service
@@ -15,14 +15,8 @@ if var_false "${ENABLE_DEFINITIONS_UPDATE}" ; then
 	service-stop 20-freshclam
 fi
 
-if var_true "${CONTAINER_ENABLE_MONITORING}" && [ "${CONTAINER_MONITORING_BACKEND,,}" = "zabbix" ]; then
-	source /assets/defaults/03-monitoring
-	cat <<EOF > "${ZABBIX_CONFIG_PATH}"/"${ZABBIX_CONFIG_FILE}.d"/tiredofit_clamav.conf
-# Zabbix ClamAV Configuration - Automatically Generated
-# Find Companion Zabbix Server Templates at https://github.com/tiredofit/docker-clamav
-# Autoregister=clamav
-EOF
-fi
+create_zabbix clamav
+
 ### Setup Persistent Storage
 #### Definitions
 if [ ! -d "${DEFINITIONS_LOCATION}" ]; then

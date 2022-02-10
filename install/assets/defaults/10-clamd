@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 CLAMD_CONFIG_FILE=${CLAMD_CONFIG_FILE:-"clamd.conf"}
 CLAMD_LOCAL_SOCKET=${CLAMD_LOCAL_SOCKET:-"/run/clamd/clamd.sock"}

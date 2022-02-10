@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 
 if var_true "${LOG_VERBOSE}" ; then
     conf_log_verbose="LogVerbose yes"
