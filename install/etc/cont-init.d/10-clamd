@@ -122,6 +122,7 @@ MaxThreads ${MAX_THREADS}
 LogFile ${LOG_PATH}/${LOG_FILE_CLAMD}
 LogFileUnlock yes
 LogTime yes
+ConcurrentDatabaseReload ${CONCURRENT_DATABASE_RELOAD}
 ${conf_log_verbose}
 
 ###############

@@ -109,24 +109,25 @@ Be sure to view the following repositories to understand all the customizable op
 
 #### Core Configuration
 
-| Parameter               | Description                                                            | Default                         |
-| ----------------------- | ---------------------------------------------------------------------- | ------------------------------- |
-| `SETUP_TYPE`            | Auto Configure Configuration each startup - Set to `MANUAL` to disable | `AUTO`                          |
-| `CLAMD_CONFIG_FILE`     | Clamd Configuration file                                               | `clamd.conf`                    |
-| `CLAMD_LOCAL_SOCKET`    | Clamd Socket Name                                                      | `/run/clamd/clamd.sock`         |
-| `CLAMD_TEMP_LOCATION`   | CLamd Temp Location                                                    | `/tmp/clamd/`                   |
-| `DATA_LOCATION`         | Base Folder for Data Files                                             | `/data/`                        |
-| `CONFIG_LOCATION`       | Folder for Config Files                                                | `${DATA_LOCATION}/config/`      |
-| `DEFINITIONS_LOCATION`  | Folder for Virus Definitions                                           | `${DATA_LOCATION`/definitions/` |
-| `ENABLE_CLAMD`          | Enable ClamD Daemon                                                    | `TRUE`                          |
-| `ENABLE_LOG_CLAMD`      | Enable Logging for Clamd                                               | `TRUE`                          |
-| `ENABLE_LOG_FRESHCLAM`  | Enable Logging for Definitions Updaer                                  | `TRUE`                          |
-| `FRESHCLAM_CONFIG_FILE` | Freshclam Definitions Updater configuration file                       | `freshclam.conf`                |
-| `LISTEN_PORT`           | ClamD TCP Socket Listen port                                           | `3310`                          |
-| `LOG_FILE_CLAMD`        | ClamD Log File                                                         | `clamd.log`                     |
-| `LOG_FILE_FRESHCLAM`    | Freshclam Log File                                                     | `freshclam.log`                 |
-| `LOG_PATH`              | Logfile locations                                                      | `/logs/`                        |
-| `LOG_VERBOSE`           | Enable Verbosity in Logs                                               | `FALSE`                         |
+| Parameter                    | Description                                                            | Default                         |
+| ---------------------------- | ---------------------------------------------------------------------- | ------------------------------- |
+| `SETUP_TYPE`                 | Auto Configure Configuration each startup - Set to `MANUAL` to disable | `AUTO`                          |
+| `CLAMD_CONFIG_FILE`          | Clamd Configuration file                                               | `clamd.conf`                    |
+| `CLAMD_LOCAL_SOCKET`         | Clamd Socket Name                                                      | `/run/clamd/clamd.sock`         |
+| `CLAMD_TEMP_LOCATION`        | CLamd Temp Location                                                    | `/tmp/clamd/`                   |
+| `DATA_LOCATION`              | Base Folder for Data Files                                             | `/data/`                        |
+| `CONFIG_LOCATION`            | Folder for Config Files                                                | `${DATA_LOCATION}/config/`      |
+| `DEFINITIONS_LOCATION`       | Folder for Virus Definitions                                           | `${DATA_LOCATION`/definitions/` |
+| `ENABLE_CLAMD`               | Enable ClamD Daemon                                                    | `TRUE`                          |
+| `ENABLE_LOG_CLAMD`           | Enable Logging for Clamd                                               | `TRUE`                          |
+| `ENABLE_LOG_FRESHCLAM`       | Enable Logging for Definitions Updaer                                  | `TRUE`                          |
+| `FRESHCLAM_CONFIG_FILE`      | Freshclam Definitions Updater configuration file                       | `freshclam.conf`                |
+| `LISTEN_PORT`                | ClamD TCP Socket Listen port                                           | `3310`                          |
+| `LOG_FILE_CLAMD`             | ClamD Log File                                                         | `clamd.log`                     |
+| `LOG_FILE_FRESHCLAM`         | Freshclam Log File                                                     | `freshclam.log`                 |
+| `LOG_PATH`                   | Logfile locations                                                      | `/logs/`                        |
+| `LOG_VERBOSE`                | Enable Verbosity in Logs                                               | `FALSE`                         |
+| `CONCURRENT_DATABASE_RELOAD` | Enable non-blocking (multi-threaded/concurrent) database reloads.      | `TRUE`                          |
 
 
 #### Virus Definitions Configuration
