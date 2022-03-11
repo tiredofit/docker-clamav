@@ -39,6 +39,7 @@ Dockerfile to build an [Clam Antivirus](https://www.clamav.net) to scan files or
     - [Virus Definitions Configuration](#virus-definitions-configuration)
     - [Virus Scanning Settings](#virus-scanning-settings)
     - [Scanning Limits](#scanning-limits)
+    - [Alerting Settings](#alerting-settings)
   - [Networking](#networking)
 - [Maintenance](#maintenance)
   - [Shell Access](#shell-access)
@@ -115,6 +116,7 @@ Be sure to view the following repositories to understand all the customizable op
 | `CLAMD_CONFIG_FILE`          | Clamd Configuration file                                               | `clamd.conf`                    |
 | `CLAMD_LOCAL_SOCKET`         | Clamd Socket Name                                                      | `/run/clamd/clamd.sock`         |
 | `CLAMD_TEMP_LOCATION`        | CLamd Temp Location                                                    | `/tmp/clamd/`                   |
+| `CONCURRENT_DATABASE_RELOAD` | Enable non-blocking (multi-threaded/concurrent) database reloads.      | `TRUE`                          |
 | `DATA_LOCATION`              | Base Folder for Data Files                                             | `/data/`                        |
 | `CONFIG_LOCATION`            | Folder for Config Files                                                | `${DATA_LOCATION}/config/`      |
 | `DEFINITIONS_LOCATION`       | Folder for Virus Definitions                                           | `${DATA_LOCATION`/definitions/` |
@@ -127,7 +129,6 @@ Be sure to view the following repositories to understand all the customizable op
 | `LOG_FILE_FRESHCLAM`         | Freshclam Log File                                                     | `freshclam.log`                 |
 | `LOG_PATH`                   | Logfile locations                                                      | `/logs/`                        |
 | `LOG_VERBOSE`                | Enable Verbosity in Logs                                               | `FALSE`                         |
-| `CONCURRENT_DATABASE_RELOAD` | Enable non-blocking (multi-threaded/concurrent) database reloads.      | `TRUE`                          |
 
 
 #### Virus Definitions Configuration

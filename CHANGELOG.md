@@ -1,3 +1,9 @@
+## 2.4.0 2022-03-11 <czosel@github>
+
+   ### Added
+      - Ability to control whether databases are loaded concurrently/multithreaded
+
+
 ## 2.3.3 2022-02-09 <dave at tiredofit dot ca>
 
    ### Changed
