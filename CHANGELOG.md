@@ -1,3 +1,9 @@
+## 2.4.1 2022-07-18 <dave at tiredofit dot ca>
+
+   ### Added
+      - Rebuilt using latest tiredofit/alpine:edge
+
+
 ## 2.4.0 2022-03-11 <czosel@github>
 
    ### Added
