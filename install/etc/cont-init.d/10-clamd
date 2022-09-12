@@ -48,10 +48,10 @@ if var_true "${ENABLE_LOG_CLAMD}" || var_true "${ENABLE_LOG_FRESHCLAM}" ; then
 fi
 
 #### Configuration
-if [ ! -f "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}" ] || [ ! -f "${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" ] ; then
+if [ ! -f "${CONFIG_LOCATION}"/"${CLAMD_CONFIG_FILE}" ] || [ ! -f "${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}" ] ; then
 	mkdir -p "${CONFIG_LOCATION}"
 	print_info "Setting up Configuration for the first time"
-	SETUP_MODE=AUTO
+	SETUP_MODE=auto
 fi
 
 #### Socket Configuration
@@ -66,7 +66,7 @@ if [ ! -d "${CLAMD_TEMP_LOCATION}" ] ; then
 	chown -R clamav:clamav "${CLAMD_TEMP_LOCATION}"
 fi
 
-if [ "$SETUP_TYPE" = "AUTO" ]; then
+if [ "${SETUP_TYPE,,}" = "auto" ]; then
 	truefalse_yesno DISABLE_CERT_CHECK
 	truefalse_yesno ENABLE_ALGORITHMIC_DETECTION
 	truefalse_yesno ENABLE_BYTECODE
@@ -102,7 +102,7 @@ EOF
 	done
 
     print_notice "Generating Configuration for Clam Antivirus"
-	cat <<EOF > "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}"
+	cat <<EOF > "${CONFIG_LOCATION}"/"${CLAMD_CONFIG_FILE}"
 ## Custom Generated Clam Antivirus Configuration! Do not edit, instead set ENV Vars
 ## If you want to use your own configuration files set SETUP_TYPE=MANUAL when starting container
 ## Last Generated on $(TZ=${TIMEZONE} date +'%Y-%m-%d %H:%M:%S %Z')
@@ -182,7 +182,17 @@ AlertExceedsMax ${ENABLE_ALERT_EXCEEDS_MAX}
 EOF
 
     print_notice "Generating Configuration for Definitions Updater"
-	cat <<EOF > "${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}"
+    if [ -n "${FRESHCLAM_DATABASES}" ] ; then
+        custom_db_array=$(echo "${FRESHCLAM_DATABASES}" | tr "," "\n")
+		for db in $custom_db_array; do
+    		custom_db=${custom_db}$(cat <<EOF
+DatabaseCustomURL ${db}
+EOF
+		)
+    	done
+    fi
+
+    cat <<EOF > "${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}"
 ## Custom Generated Freshclam Configuration! Do not edit, instead set ENV Vars
 ## If you want to use your own configuration files set SETUP_TYPE=MANUAL when starting container
 ## Last Generated on $(date)
@@ -192,17 +202,17 @@ DatabaseDirectory ${DEFINITIONS_LOCATION}
 DatabaseMirror database.clamav.net
 ScriptedUpdates yes
 LogTime yes
+${custom_db}
 EOF
-
 else
 	print_notice "Manual Configuration Mode selected"
 fi
 chown -R clamav:clamav "${CONFIG_LOCATION}"
 
 ### Check for Definitions
-if [ ! -f "${DEFINITIONS_LOCATION}"main.cvd  ]; then
+if [ ! -f "${DEFINITIONS_LOCATION}"/main.cvd  ]; then
     print_warn "No Virus Definitions Found! Downloading.."
-	silent freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
+	silent freshclam -F --config-file="${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
 fi
 
 echo "alias clamscan='clamscan -d ${DEFINITIONS_LOCATION}'" > /root/.bashrc

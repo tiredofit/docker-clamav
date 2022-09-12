@@ -1,3 +1,9 @@
+## 2.5.0 2022-09-12 <dave at tiredofit dot ca>
+
+   ### Added
+      - Ability to load custom remote datases and have updated with Freshclam
+
+
 ## 2.4.2 2022-08-17 <dave at tiredofit dot ca>
 
    ### Changed
