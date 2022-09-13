@@ -187,6 +187,7 @@ EOF
 		for db in $custom_db_array; do
     		custom_db=${custom_db}$(cat <<EOF
 DatabaseCustomURL ${db}
+
 EOF
 		)
     	done

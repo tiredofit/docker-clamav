@@ -1,3 +1,9 @@
+## 2.5.1 2022-09-12 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix line break issues with multiple external definition sources
+
+
 ## 2.5.0 2022-09-12 <dave at tiredofit dot ca>
 
    ### Added
