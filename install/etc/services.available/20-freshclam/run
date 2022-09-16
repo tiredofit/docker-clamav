@@ -5,7 +5,7 @@ prepare_service both 10-clamd
 PROCESS_NAME="freshclam"
 
 check_container_initialized
-DEBUG_MODE=TRUE
+
 if [ "${MODE,,}" = "manual" ] || [ "${1,,}" = "manual" ] || [ "${1,,}" = "now" ]; then
     DEFINITIONS_UPDATE_BEGIN=+0
     manual=TRUE
