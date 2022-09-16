@@ -1,3 +1,9 @@
+## 2.5.3 2022-09-16 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Remove unnecessary DEBUG code
+
+
 ## 2.5.2 2022-09-16 <dave at tiredofit dot ca>
 
 This is a maintenance release that patches some glaring bugs causing process runaways on the host docker systems. It is recommended to upgrade to this version immediately.
