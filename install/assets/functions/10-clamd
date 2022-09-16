@@ -1,10 +1,5 @@
 #!/command/with-contenv bash
 
-if var_true "${LOG_VERBOSE}" ; then
-    conf_log_verbose="LogVerbose yes"
-    log_verbose="--verbose"
-fi
-
 if var_true "${ENABLE_LOG_FRESHCLAM}" ; then
     freshclam_log="--log=${LOG_PATH}/${LOG_FILE_FRESHCLAM}"
 fi
@@ -13,6 +8,11 @@ if var_true "${ENABLE_LOG_CLAMD}" ; then
     clamd_log="--log=${LOG_PATH}/${LOG_FILE_CLAMD}"
 fi
 
-if var_true DEBUG_MODE ; then
+if var_true "${DEBUG_MODE}" ; then
     debug_arg="--debug"
+fi
+
+if var_true "${LOG_VERBOSE}" ; then
+    conf_log_verbose="LogVerbose yes"
+    log_verbose="--verbose"
 fi

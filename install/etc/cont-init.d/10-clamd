@@ -213,7 +213,7 @@ chown -R clamav:clamav "${CONFIG_LOCATION}"
 ### Check for Definitions
 if [ ! -f "${DEFINITIONS_LOCATION}"/main.cvd  ]; then
     print_warn "No Virus Definitions Found! Downloading.."
-	silent freshclam -F --config-file="${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
+	silent freshclam -F --config-file="${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}" ${log_verbose} ${freshclam_log} ${debug_arg}
 fi
 
 echo "alias clamscan='clamscan -d ${DEFINITIONS_LOCATION}'" > /root/.bashrc

@@ -5,44 +5,47 @@ prepare_service both 10-clamd
 PROCESS_NAME="freshclam"
 
 check_container_initialized
-
-date >/dev/null
-
-if [ "$1" != "NOW" ]; then
-    sleep 10
-    liftoff
-elif [ "$1" = "NOW" ]; then
+DEBUG_MODE=TRUE
+if [ "${MODE,,}" = "manual" ] || [ "${1,,}" = "manual" ] || [ "${1,,}" = "now" ]; then
     DEFINITIONS_UPDATE_BEGIN=+0
-    MANUAL=TRUE
+    manual=TRUE
+    print_debug "Detected Manual Mode"
+else
+    sleep 5
+    current_time=$(date +"%s")
+    today=$(date +"%Y%m%d")
+
+    if [[ $DEFINITIONS_UPDATE_BEGIN =~ ^\+(.*)$ ]]; then
+        waittime=$(( ${BASH_REMATCH[1]} * 60 ))
+        target_time=$(($current_time + $waittime))
+    else
+        target_time=$(date --date="${today}${DEFINITIONS_UPDATE_BEGIN}" +"%s")
+        if [[ "$target_time" < "$current_time" ]]; then
+            target_time=$(($target_time + 24*60*60))
+        fi
+        waittime=$(($target_time - $current_time))
+    fi
+    print_debug "Wait Time: ${waittime} Target time: ${target_time} Current Time: ${current_time}"
+    print_info "Next definitions at $(date -d @${target_time} +"%Y-%m-%d %T %Z")"
+    sleep $waittime
 fi
 
-### Container Startup
-print_notice "Definitions Updating Routines Initialized on $(date)"
+while true; do
+    update_start_time=$(date +"%s")
+    print_debug "Definition update routines started time: $(date +'%Y-%m-%d %T %Z')"
+    silent freshclam -F --config-file="${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}" --daemon-notify "${CONFIG_LOCATION}"/"${CLAMD_CONFIG_FILE}" ${log_verbose} ${freshclam_log} ${debug_arg}
+    update_finish_time=$(date +"%s")
+    update_total_time=$(echo $((update_finish_time-update_start_time)))
+    print_info "Update routines finish time: $(date -d @${update_finish_time} +"%Y-%m-%d %T %Z")"
+    print_notice "Update routines time taken: $(echo ${update_total_time} | awk '{printf "Hours: %d Minutes: %02d Seconds: %02d", $1/3600, ($1/60)%60, $1%60}')"
 
-### Wait for Next time to start backup
-  current_time=$(date +"%s")
-  today=$(date +"%Y%m%d")
-
-  if [[ $DEFINITIONS_UPDATE_BEGIN =~ ^\+(.*)$ ]]; then
-        waittime=$(( ${BASH_REMATCH[1]} * 60 ))
-  else
-        target_time=$(date --date="${today}${DEFINITIONS_UPDATE_BEGIN}" +"%s")
-    if [[ "$target_time" < "$current_time" ]]; then
-        target_time=$(($target_time + 24*60*60))
-    fi
-  waittime=$(($target_time - $current_time))
-  fi
-
-  sleep $waittime
-
-  while true; do
-    print_info "Downloading Latest Definitions"
-  	silent exec freshclam -F --config-file="${CONFIG_LOCATION}""${FRESHCLAM_CONFIG_FILE}" --daemon-notify "${CONFIG_LOCATION}""${CLAMD_CONFIG_FILE}" "${log_verbose}" "${freshclam_log}" "${debug_arg}"
-### Go back to Sleep until next definitions update time
-   if [ "$MANUAL" = "TRUE" ]; then
+    if var_true "${manual}" ; then
+        print_debug "Exiting due to manual mode"
         exit 0;
-   else
-   	    print_debug "Sleeping for $DEFINITIONS_UPDATE_FREQUENCY minutes"
-        sleep $(($DEFINITIONS_UPDATE_FREQUENCY*60))
-   fi
+    else
+        print_notice "Sleeping for another $(($DEFINITIONS_UPDATE_FREQUENCY*60-update_total_time)) seconds. Waking up at $(date -d@"$(( $(date +%s)+$(($DEFINITIONS_UPDATE_FREQUENCY*60-update_total_time))))" +"%Y-%m-%d %T %Z") "
+        sleep $(($DEFINITIONS_UPDATE_FREQUENCY*60-update_total_time))
+    fi
 done
+
+liftoff

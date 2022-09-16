@@ -44,6 +44,7 @@ Dockerfile to build an [Clam Antivirus](https://www.clamav.net) to scan files or
   - [Networking](#networking)
 - [Maintenance](#maintenance)
   - [Shell Access](#shell-access)
+  - [Manual Definition Updates](#manual-definition-updates)
 - [Support](#support)
   - [Usage](#usage)
   - [Bugfixes](#bugfixes)
@@ -213,6 +214,10 @@ For debugging and maintenance purposes you may want access the containers shell.
 ``bash
 docker exec -it (whatever your container name is) bash
 ``
+
+### Manual Definition Updates
+Manual Definition Updates can be performed by entering the container and typing `update-now`
+
 ## Support
 
 These images were built to serve a specific need in a production environment and gradually have had more functionality added based on requests from the community.
