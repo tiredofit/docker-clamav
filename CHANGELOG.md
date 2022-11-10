@@ -1,3 +1,10 @@
+## 2.6.0 2022-11-10 <dave at tiredofit dot ca>
+
+   ### Added
+      - ClamAV 1.05.1
+      - Start building from source instead of relying on distribution packages
+
+
 ## 2.5.3 2022-09-16 <dave at tiredofit dot ca>
 
    ### Changed
