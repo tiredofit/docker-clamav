@@ -1,4 +1,4 @@
-FROM docker.io/tiredofit/alpine:3.16
+FROM docker.io/tiredofit/alpine:3.17
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG CLAMAV_VERSION
@@ -27,7 +27,7 @@ RUN source /assets/functions/00-container && \
                 json-c-dev \
                 libmspack-dev \
                 libmilter-dev \
-                libressl-dev \
+                openssl-dev \
                 libxml2-dev \
                 linux-headers \
                 ncurses-dev \

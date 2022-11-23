@@ -1,3 +1,10 @@
+## 2.6.1 2022-11-23 <dave at tiredofit dot ca>
+
+   ### Added
+      - Alpine 3.17 base
+      - Switch to OpenSSL from LibreSSL
+
+
 ## 2.6.0 2022-11-10 <dave at tiredofit dot ca>
 
    ### Added
