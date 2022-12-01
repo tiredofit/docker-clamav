@@ -1,9 +1,12 @@
-FROM docker.io/tiredofit/alpine:3.17
+ARG DISTRO="alpine"
+ARG DISTRO_VARIANT="3.17"
+
+FROM docker.io/tiredofit/${DISTRO}:${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG CLAMAV_VERSION
 
-ENV CLAMAV_VERSION=clamav-1.0.0 \
+ENV CLAMAV_VERSION=${CLAMAV_VERSION:-"clamav-1.0.0"} \
     CLAMAV_REPO_URL=https://github.com/Cisco-Talos/clamav \
     CONTAINER_ENABLE_MESSAGING=FALSE \
     IMAGE_NAME="tiredofit/clamav" \
@@ -14,9 +17,9 @@ RUN source /assets/functions/00-container && \
     set -x && \
     addgroup -g 3310 clamav && \
     adduser -S -D -G clamav -u 3310 -h /var/lib/clamav/ clamav && \
-    apk update && \
-    apk upgrade && \
-    apk add -t .clamav-build-deps \
+    package update && \
+    package upgrade && \
+    package install .clamav-build-deps \
                 build-base \
                 bzip2-dev \
                 cargo \
@@ -37,7 +40,7 @@ RUN source /assets/functions/00-container && \
                 zlib-dev \
                 && \
     \
-    apk add -t .clamav-run-deps \
+    package install .clamav-run-deps \
                 bzip2 \
                 check \
                 json-c \
@@ -70,13 +73,12 @@ RUN source /assets/functions/00-container && \
     make -j$(nproc) && \
     make install && \
     \
-    apk del .clamav-build-deps && \
-    rm -rf /root/.cargo /root/.gitconfig && \
-    rm -rf /usr/src/* && \
-    rm -rf /var/cache/apk/*
+    package remove .clamav-build-deps && \
+    package cleanup && \
+    rm -rf /root/.cargo \
+           /root/.gitconfig \
+           /usr/src/*
 
-### Networking Configuration
 EXPOSE 3310
 
-### Add Files
 COPY install /
