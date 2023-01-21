@@ -1,3 +1,9 @@
+## 2.6.4 2023-01-21 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change default timer for downloading new updates from 60 minutes to 1440 minutes after first check
+
+
 ## 2.6.3 2022-12-01 <dave at tiredofit dot ca>
 
    ### Changed

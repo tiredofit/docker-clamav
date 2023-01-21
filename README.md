@@ -1,7 +1,7 @@
 # github.com/tiredofit/docker-clamav
 
 [![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-clamav?style=flat-square)](https://github.com/tiredofit/docker-clamav/releases/latest)
-[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-clamav/build?style=flat-square)](https://github.com/tiredofit/docker-clamav/actions?query=workflow%3Abuild)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/tiredofit/docker-clamav/main.yml?branch=main&style=flat-square)](https://github.com/tiredofit/docker-clamav/actions)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/clamav.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/clamav/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/clamav.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/clamav/)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
@@ -140,7 +140,7 @@ Be sure to view the following repositories to understand all the customizable op
 | Parameter                      | Description                                                                                                                                    | Default |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `ENABLE_DEFINITIONS_UPDATE`    | Enable Automatic Definitions Updating                                                                                                          | `TRUE`  |
-| `DEFINITIONS_UPDATE_FREQUENCY` | How often to check for new Definitions in minutes                                                                                              | `60`    |
+| `DEFINITIONS_UPDATE_FREQUENCY` | How often to check for new Definitions in minutes                                                                                              | `1440`  |
 | `DEFINITIONS_UPDATE_BEGIN`     | What time to do the first dump. Defaults to immediate. Must be in one of two formats                                                           |         |
 |                                | Absolute HHMM, e.g. `2330` or `0415`                                                                                                           |         |
 |                                | Relative +MM, i.e. how many minutes after starting the container, e.g. `+0` (immediate), `+10` (in 10 minutes), or `+90` in an hour and a half |         |
