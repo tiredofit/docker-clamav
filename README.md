@@ -63,11 +63,17 @@ Dockerfile to build an [Clam Antivirus](https://www.clamav.net) to scan files or
 Clone this repository and build the image with `docker build -t (imagename) .`
 
 ### Prebuilt Images
-Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/clamav) and is the recommended method of installation.
+Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/clamav)
 
 ```bash
-docker pull tiredofit/clamav:(imagetag)
+docker pull docker.io/tiredofdit/clamav:(imagetag)
 ```
+
+Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-clamav/pkgs/container/docker-clamav) 
+ 
+```
+docker pull ghcr.io/tiredofit/docker-clamav/pkgs/container/docker-clamav):(imagetag)
+``` 
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
@@ -223,7 +229,7 @@ Manual Definition Updates can be performed by entering the container and typing 
 These images were built to serve a specific need in a production environment and gradually have had more functionality added based on requests from the community.
 ### Usage
 - The [Discussions board](../../discussions) is a great place for working with the community on tips and tricks of using this image.
-- Consider [sponsoring me](https://github.com/sponsors/tiredofit) personalized support.
+- Consider [sponsoring me](https://github.com/sponsors/tiredofit) for personalized support
 ### Bugfixes
 - Please, submit a [Bug Report](issues/new) if something isn't working as expected. I'll do my best to issue a fix in short order.
 
