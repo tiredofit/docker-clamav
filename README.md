@@ -66,7 +66,7 @@ Clone this repository and build the image with `docker build -t (imagename) .`
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/clamav)
 
 ```bash
-docker pull docker.io/tiredofdit/clamav:(imagetag)
+docker pull docker.io/tiredofit/clamav:(imagetag)
 ```
 
 Builds of the image are also available on the [Github Container Registry](https://github.com/tiredofit/docker-clamav/pkgs/container/docker-clamav) 
