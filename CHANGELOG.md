@@ -1,3 +1,9 @@
+## 2.6.8 2023-08-09 <teawithfruit@github>
+
+   ### Changed
+      - Fix issue with DatabaseCustomURL not creating line breaks with multiple databases
+
+
 ## 2.6.7 2023-05-10 <dave at tiredofit dot ca>
 
    ### Added
