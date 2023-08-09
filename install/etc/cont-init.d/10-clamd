@@ -183,14 +183,7 @@ EOF
 
     print_notice "Generating Configuration for Definitions Updater"
     if [ -n "${FRESHCLAM_DATABASES}" ] ; then
-        custom_db_array=$(echo "${FRESHCLAM_DATABASES}" | tr "," "\n")
-		for db in $custom_db_array; do
-    		custom_db=${custom_db}$(cat <<EOF
-DatabaseCustomURL ${db}
-
-EOF
-		)
-    	done
+        custom_db=$(echo "${FRESHCLAM_DATABASES}" | tr "," "\n" | sed -e 's/^/DatabaseCustomURL /')
     fi
 
     cat <<EOF > "${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}"
