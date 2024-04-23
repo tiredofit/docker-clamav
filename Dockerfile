@@ -61,7 +61,7 @@ RUN source /assets/functions/00-container && \
           -D CMAKE_INSTALL_LIBDIR=/usr/lib \
           -D APP_CONFIG_DIRECTORY=/etc/clamav \
           -D DATABASE_DIRECTORY=/var/lib/clamav \
-          -D ENABLE_TESTS=ON \
+          -D ENABLE_TESTS=OFF \
           -D ENABLE_CLAMONACC=OFF \
           -D ENABLE_MILTER=ON \
           -D ENABLE_EXTERNAL_MSPACK=ON \

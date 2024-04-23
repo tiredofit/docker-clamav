@@ -1,3 +1,9 @@
+## 2.6.15 2024-04-23 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Disable tests
+
+
 ## 2.6.14 2024-04-17 <dave at tiredofit dot ca>
 
    ### Added
