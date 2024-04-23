@@ -1,3 +1,9 @@
+## 2.6.16 2024-04-23 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Stop building aarch64 for time being due to github actions timeout
+
+
 ## 2.6.15 2024-04-23 <dave at tiredofit dot ca>
 
    ### Changed
