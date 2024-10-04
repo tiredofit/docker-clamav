@@ -1,3 +1,9 @@
+## 2.6.20 2024-10-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Attempt renabling armv8/arm64 builds
+
+
 ## 2.6.19 2024-09-07 <dave at tiredofit dot ca>
 
    ### Added
