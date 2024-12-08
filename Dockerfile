@@ -1,5 +1,5 @@
 ARG DISTRO="alpine"
-ARG DISTRO_VARIANT="3.20"
+ARG DISTRO_VARIANT="3.21"
 
 FROM docker.io/tiredofit/${DISTRO}:${DISTRO_VARIANT}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
