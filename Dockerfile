@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG CLAMAV_VERSION
 
-ENV CLAMAV_VERSION=${CLAMAV_VERSION:-"clamav-1.4.1"} \
+ENV CLAMAV_VERSION=${CLAMAV_VERSION:-"clamav-1.4.2"} \
     CLAMAV_REPO_URL=https://github.com/Cisco-Talos/clamav \
     CONTAINER_ENABLE_MESSAGING=FALSE \
     IMAGE_NAME="tiredofit/clamav" \
