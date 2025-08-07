@@ -124,6 +124,7 @@ LogFileUnlock yes
 LogTime yes
 ConcurrentDatabaseReload ${CONCURRENT_DATABASE_RELOAD}
 ${conf_log_verbose}
+${conf_log_debug}
 
 ###############
 # Results

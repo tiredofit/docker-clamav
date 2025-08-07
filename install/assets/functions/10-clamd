@@ -16,3 +16,7 @@ if var_true "${LOG_VERBOSE}" ; then
     conf_log_verbose="LogVerbose yes"
     log_verbose="--verbose"
 fi
+
+if var_true "${ENABLE_LOG_DEBUG}" ; then
+    conf_log_debug="Debug yes"
+fi
