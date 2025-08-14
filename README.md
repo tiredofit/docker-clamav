@@ -139,6 +139,7 @@ Be sure to view the following repositories to understand all the customizable op
 | `LOG_FILE_FRESHCLAM`         | Freshclam Log File                                                              | `freshclam.log`                 |
 | `LOG_PATH`                   | Logfile locations                                                               | `/logs/`                        |
 | `LOG_VERBOSE`                | Enable Verbosity in Logs                                                        | `FALSE`                         |
+| `ENABLE_LOG_DEBUG`           | Enable Debug mode in clamd Logs                                                 | `FALSE`                         |
 
 
 #### Virus Definitions Configuration
