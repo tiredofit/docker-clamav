@@ -1,3 +1,9 @@
+## 2.6.24 2025-08-14 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add support for debug logs within ClamAV Logs - Credit: virjhangianinyu@github
+
+
 ## 2.6.23 2025-06-18 <dave at tiredofit dot ca>
 
    ### Added
