@@ -213,4 +213,31 @@ fi
 echo "alias clamscan='clamscan -d ${DEFINITIONS_LOCATION}'" > /root/.bashrc
 
 print_info "Container Initialization Complete"
+
+cat <<EOF
+
+*********************************************************************************
+*                                                                               *
+*                    END OF LIFE NOTICE AUGUST 14, 2025                         *
+*                               tiredofit/clamav                                *
+*                                                                               *
+* This image is no longer maintained as of and will not receive updates.        *
+*                                                                               *
+* A successor image is available at:                                            *
+*                                                                               *
+* Repository | Documentation:                                                   *
+*   - https://github.com/nfrastack/container-clamav                             *
+*                                                                               *
+* Image Registries:                                                             *
+*   - https://hub.docker.com/r/nfrastack/clamav                                 *
+*   - https://github.com/nfrastack/container-base/pkgs/container/container-base *
+*                                                                               *
+* Please visit https://nfrastack.com for more information.                      *
+*                                                                               *
+*********************************************************************************
+
+EOF
+
+sleep 15
+
 liftoff

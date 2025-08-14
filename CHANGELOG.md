@@ -1,3 +1,9 @@
+## 2.6.99 2025-08-14 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add EOL Notice for tiredofit/clamav
+
+
 ## 2.6.24 2025-08-14 <dave at tiredofit dot ca>
 
    ### Added
