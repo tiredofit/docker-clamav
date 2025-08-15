@@ -81,7 +81,6 @@ Example:
 
 Have a look at the container registries and see what tags are available.
 
-
 #### Multi-Architecture Support
 
 Images are built for `amd64` by default, with optional support for `arm64` and other architectures.
@@ -204,7 +203,7 @@ Below is the complete list of available options that can be used to customize yo
 | `SCAN_PE`                          | Scan PE Files                                    | `TRUE`           |          |
 | `SCAN_SWF`                         | Scan SWF Files                                   | `TRUE`           |          |
 | `EXCLUDE_PUA`                      | Comma Seperated Values of PUA formats to exclude | `NetTool,PWTool` |          |
-| `INCLUDE_PUA`                      | Comma Seperated Values of PUA formats to exclude | `(null)`         |          |
+| `INCLUDE_PUA`                      | Comma Seperated Values of PUA formats to include | `(null)`         |          |
 
 #### Scanning Limits
 
@@ -241,16 +240,16 @@ Below is the complete list of available options that can be used to customize yo
 
 | Parameter                      | Description                                                        | Default | Advanced |
 | ------------------------------ | ------------------------------------------------------------------ | ------- | -------- |
-| `ALERT_ENCRYPTED_ARCHIVE`      | Alert on encrypted archives (.zip, .7zip, .rar)                    | `FALSE` |          |
-| `ALERT_ENCRYPTED_DOC`          | Alert on encrypted documents (.pdf)                                | `FALSE` |          |
-| `ALERT_OLE2_MACROS`            | Alert on OLE2 files containing VBA macros                          | `FALSE` |          |
-| `ALERT_EXCEEDS_MAX`            | Alert on files exceeding MAX_FILES, MAX_SCAN_SIZE or MAX_RECURSION | `FALSE` |          |
 | `ALERT_BROKEN_EXECUTABLES`     | Alert on broken executibles                                        | `FALSE` |          |
 | `ALERT_BROKEN_MEDIA`           | Alert on broken media                                              | `FALSE` |          |
+| `ALERT_ENCRYPTED_ARCHIVE`      | Alert on encrypted archives (.zip, .7zip, .rar)                    | `FALSE` |          |
+| `ALERT_ENCRYPTED_DOC`          | Alert on encrypted documents (.pdf)                                | `FALSE` |          |
+| `ALERT_EXCEEDS_MAX`            | Alert on files exceeding MAX_FILES, MAX_SCAN_SIZE or MAX_RECURSION | `FALSE` |          |
+| `ALERT_HEURISTIC`              | Alert on Heuristics findings                                       | `FALSE` |          |
+| `ALERT_OLE2_MACROS`            | Alert on OLE2 files containing VBA macros                          | `FALSE` |          |
+| `ALERT_PARTITION_INTERSECTION` | Alert on partition intersections in DMG files                      | `FALSE` |          |
 | `ALERT_PHISHING_CLOAK`         | Alert on potential phishing cloaking of urls                       | `FALSE` |          |
 | `ALERT_PHISHING_SSL`           | Alert on non matching SSL destinations                             | `FALSE` |          |
-| `ALERT_PARTITION_INTERSECTION` | Alert on partition intersections in DMG files                      | `FALSE` |          |
-| `ALERT_HEURISTIC`              | Alert on Heuristics findings                                       | `FALSE` |          |
 
 ## Users and Groups
 
@@ -261,9 +260,9 @@ Below is the complete list of available options that can be used to customize yo
 
 ### Networking
 
-| Port   | Protocol | Description          |
-| ------ | -------- | -------------------- |
-| `3310` | tcp      | ClamD Listening Port |
+| Port   | Protocol | Description |
+| ------ | -------- | ----------- |
+| `3310` | tcp      | Clam Daemon |
 
 * * *
 
