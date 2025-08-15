@@ -40,15 +40,6 @@ This repository will build a container with [Clam Antivirus](https://www.clamav.
 ## Installation
 
 ### Prebuilt Images
-
-Feature limited builds of the image are available on the [Github Container Registry](https://github.com/nfrastack/container-clamav/pkgs/container/container-clamav) and [Docker Hub](https://hub.docker.com/r/nfrastack/clamav).
-
-To unlock advanced features, one must provide a code to be able to change specific environment variables from defaults. Support the development to gain access to a code.
-
-To get access to the image use your container orchestrator to pull from the following locations:
-
-
-### Prebuilt Images
 Feature limited builds of the image are available on the [Github Container Registry](https://github.com/nfrastack/container-clamav/pkgs/container/container-clamav) and [Docker Hub](https://hub.docker.com/r/nfrastack/clamav).
 
 To unlock advanced features, one must provide a code to be able to change specific environment variables from defaults. Support the development to gain access to a code.
