@@ -1,0 +1,187 @@
+{
+    "zabbix_export": {
+        "version": "7.2",
+        "template_groups": [
+            {
+                "uuid": "a571c0d144b14fd4a87a9d9b2aa9fcd6",
+                "name": "Templates/Applications"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "e785d267871c470393ba2223ac79cbc3",
+                "template": "ClamAV",
+                "name": "ClamAV",
+                "description": "ClamAV\nThis template is meant to be used with nfrastrack/container-clamav > 3.0.0\n\nhttps://www.nfrastack.com",
+                "groups": [
+                    {
+                        "name": "Templates/Applications"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "005398c3f2bb41149d2ddce777ab9f19",
+                        "name": "ClamAV: CPU Utilization",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.cpu.util[clamd]",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "%",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "8e3e8385ff5c4278a2192521a039daf2",
+                        "name": "Freshclam: CPU Utilization",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.cpu.util[freshclam]",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "%",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "69bfdd2dfdbc4d1e81e0f97a590cc76b",
+                        "name": "ClamAV: Memory usage (Physical)",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.mem[clamd,,,,rss]",
+                        "history": "7d",
+                        "units": "B",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "85ff5d1cc18b4f5b8593a826958fd18d",
+                        "name": "ClamAV: Memory usage (Virtual)",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.mem[clamd,,,,vsize]",
+                        "history": "7d",
+                        "units": "B",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "50974d4e585b42a5832fee4e0155794d",
+                        "name": "Freshclam: Memory usage (Physical)",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.mem[freshclam,,,,rss]",
+                        "history": "7d",
+                        "units": "B",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a19073096823418f8786619d8ec4a2ed",
+                        "name": "Freshclam: Memory usage (Virtual)",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.mem[freshclam,,,,vsize]",
+                        "history": "7d",
+                        "units": "B",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "9e83b864c5c34aa9a0f4d51b0dac253b",
+                        "name": "ClamAV: Processes",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.num[clamd]",
+                        "history": "7d",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "3709212f7c0948adb445c3ecde128c3e",
+                                "expression": "sum(/ClamAV/proc.num[clamd],#3)=0",
+                                "name": "ClamAV: Process is not running",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "fe610e95df8442968d3fb9ca05e52c5e",
+                        "name": "Freshclam: Processes",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "proc.num[freshclam]",
+                        "history": "7d",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "fdbab74205c34a288ce18c676a65adac",
+                        "name": "ClamAV: Version",
+                        "type": "ZABBIX_ACTIVE",
+                        "key": "system.run[\"clamd --version | awk '{print $2}' | cut -d / -f1\"]",
+                        "delay": "60m",
+                        "history": "7d",
+                        "value_type": "CHAR",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "ClamAV"
+                            }
+                        ]
+                    }
+                ],
+                "tags": [
+                    {
+                        "tag": "Service",
+                        "value": "Antivirus"
+                    },
+                    {
+                        "tag": "Service",
+                        "value": "Mail"
+                    }
+                ],
+                "valuemaps": [
+                    {
+                        "uuid": "dcd280dcbbac4ab2b102ed1fa41bb460",
+                        "name": "Service state",
+                        "mappings": [
+                            {
+                                "value": "0",
+                                "newvalue": "Down"
+                            },
+                            {
+                                "value": "1",
+                                "newvalue": "Up"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

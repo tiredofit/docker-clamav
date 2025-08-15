@@ -1,14 +1,16 @@
-version: '2.4'
 services:
-  
+
   clamav-app:
-    image: tiredofit/clamav:latest
+    image: docker.io/nfrastack/clamav:latest
     container_name: clamav-app
+    ports:
+      - 3310:3310
     volumes:
       - ./data:/data
       - ./logs:/logs
     environment:
-      - CONTAINER_NAME=clamav-app
+      - TIMEZONE=America/Vancouver
+
       - DEFINITIONS_UPDATE_FREQUENCY=60
     networks:
       - services

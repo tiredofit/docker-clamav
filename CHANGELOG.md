@@ -1,3 +1,15 @@
+## 3.0.0 2025-08-14 <dave at tiredofit dot ca>
+
+   ### Added
+      - Switch to nfrastack/container-base image
+      - Alpine 3.22
+      - Many new scan and alert options
+      - Alert Script functionality for when Virus detected
+
+   ### Changed
+      - Environment variables and defaults have changed in names and values, please review the README
+
+
 ## 2.6.99 2025-08-14 <dave at tiredofit dot ca>
 
    ### Added

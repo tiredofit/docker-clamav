@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: © 2025 Nfrastack <code@nfrastack.com>
+#
+# SPDX-License-Identifier: MIT
+
+set_env CACHE_SIZE="65536" nfrastack/clamav
+set_env DEFINITIONS_UPDATE_FREQUENCY="1440" nfrastack/clamav
+set_env ENABLE_CLAMD="TRUE" nfrastack/clamav
+set_env LISTEN_PORT="3310" nfrastack/clamav
+set_env MAX_CONNECTION_QUEUE_LENGTH="200" nfrastack/clamav
+set_env MAX_DIRECTORY_RECURSION="15" nfrastack/clamav
+set_env MAX_EMBEDDEDPE="40M" nfrastack/clamav
+set_env MAX_FILES="10000" nfrastack/clamav
+set_env MAX_FILE_SIZE="100M" nfrastack/clamav
+set_env MAX_HTMLNORMALIZE="40M" nfrastack/clamav
+set_env MAX_HTMLNOTAGS="8M" nfrastack/clamav
+set_env MAX_ICONSPE="100" nfrastack/clamav
+set_env MAX_PARTITIONS="50" nfrastack/clamav
+set_env MAX_QUEUE="100" nfrastack/clamav
+set_env MAX_RECHWP3="16" nfrastack/clamav
+set_env MAX_RECURSION="17" nfrastack/clamav
+set_env MAX_SCAN_SIZE="400M" nfrastack/clamav
+set_env MAX_SCAN_TIME="0" nfrastack/clamav
+set_env MAX_SCRIPTNORMALIZE="20M" nfrastack/clamav
+set_env MAX_THREADS="10" nfrastack/clamav
+set_env MAX_ZIPTYPERCG="1M" nfrastack/clamav
+set_env PCRE_MATCH_LIMIT="100000" nfrastack/clamav
+set_env PCRE_MAX_FILE_SIZE="100M" nfrastack/clamav
+set_env PCRE_RECMATCH_LIMIT="2000" nfrastack/clamav
+set_env SELFCHECK_INTERVAL="600" nfrastack/clamav
+set_env STREAM_MAX_LENGTH="25M" nfrastack/clamav
+set_env TIMEOUT_COMMAND_READ="30" nfrastack/clamav
+set_env TIMEOUT_IDLE="60" nfrastack/clamav
+set_env TIMEOUT_READ="20" nfrastack/clamav
+set_env TIMEOUT_SEND_BUF="500" nfrastack/clamav

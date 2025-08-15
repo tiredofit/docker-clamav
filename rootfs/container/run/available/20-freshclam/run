@@ -1,8 +1,14 @@
 #!/command/with-contenv bash
+# SPDX-FileCopyrightText: © 2025 Nfrastack <code@nfrastack.com>
+#
+# SPDX-License-Identifier: MIT
 
-source /assets/functions/00-container
-prepare_service both 10-clamd
-PROCESS_NAME="freshclam"
+source /container/base/functions/container/init
+prepare_service 10-clamd
+SERVICE_NAME="freshclam"
+
+source /container/functions/10-clamd
+freshclam_parse_args
 
 check_container_initialized
 
@@ -27,13 +33,13 @@ else
     fi
     print_debug "Wait Time: ${waittime} Target time: ${target_time} Current Time: ${current_time}"
     print_info "Next definitions at $(date -d @${target_time} +"%Y-%m-%d %T %Z")"
-    sleep $waittime
+    sleep ${waittime}
 fi
 
 while true; do
     update_start_time=$(date +"%s")
     print_debug "Definition update routines started time: $(date +'%Y-%m-%d %T %Z')"
-    silent freshclam -F --config-file="${CONFIG_LOCATION}"/"${FRESHCLAM_CONFIG_FILE}" --daemon-notify "${CONFIG_LOCATION}"/"${CLAMD_CONFIG_FILE}" ${log_verbose} ${freshclam_log} ${debug_arg}
+    ${exec_prefix} freshclam -F --config-file="${CONFIG_PATH}"/"${FRESHCLAM_CONFIG_FILE}" --daemon-notify "${CONFIG_PATH}"/"${CLAMD_CONFIG_FILE}" --log="${LOG_PATH}"/"${LOG_FILE_FRESHCLAM}" ${log_verbose} ${debug_arg}
     update_finish_time=$(date +"%s")
     update_total_time=$(echo $((update_finish_time-update_start_time)))
     print_info "Update routines finish time: $(date -d @${update_finish_time} +"%Y-%m-%d %T %Z")"

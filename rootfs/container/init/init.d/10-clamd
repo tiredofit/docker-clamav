@@ -1,0 +1,48 @@
+#!/command/with-contenv bash
+# SPDX-FileCopyrightText: © 2025 Nfrastack <code@nfrastack.com>
+#
+# SPDX-License-Identifier: MIT
+
+source /container/base/functions/container/init
+prepare_service 10-clamd
+SERVICE_NAME="clamav"
+
+clamav_bootstrap_filesystem
+clamav_configure_logging
+call create_zabbix clamav
+
+if [ "${CLAMD_SETUP_TYPE,,}" = "auto" ]; then
+    clamd_generate_configuration
+else
+    print_notice "ClamD manual configuration mode selected - please configure the ${CONFIG_PATH}/${CLAMD_CONFIG_FILE}"
+fi
+
+if [ "${FRESHCLAM_SETUP_TYPE,,}" = "auto" ]; then
+    freshclam_generate_configuration
+else
+    print_notice "Freshclam manual configuration mode selected - please configure the ${CONFIG_PATH}/${FRESHCLAM_CONFIG_FILE}"
+fi
+
+if var_false "${ENABLE_CLAMD}" ; then
+	print_info "Disabling ClamD from running - This image is only suitable for manual scanning in this state"
+	service-stop 10-clamd
+else
+    echo "alias clamscan='clamscan -d ${DEFINITIONS_PATH}'" > /root/.bashrc
+fi
+
+if var_false "${ENABLE_DEFINITIONS_UPDATE}" ; then
+	print_info "Disabling Definitions from being automatically updated"
+	service-stop 20-freshclam
+else
+    if [ ! -f "${DEFINITIONS_PATH}"/main.cvd  ]; then
+        print_warn "No Virus Definitions Found! Downloading.."
+    	freshclam_parse_args
+        silent s6-setuidgid clamav \
+                                    freshclam \
+                                                -F \
+                                                --config-file="${CONFIG_PATH}"/"${FRESHCLAM_CONFIG_FILE}" \
+                                                --log="${LOG_PATH}"/"${LOG_FILE_FRESHCLAM}" ${log_verbose} ${debug_arg}
+    fi
+fi
+
+liftoff

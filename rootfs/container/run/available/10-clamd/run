@@ -1,0 +1,20 @@
+#!/command/with-contenv bash
+# SPDX-FileCopyrightText: © 2025 Nfrastack <code@nfrastack.com>
+#
+# SPDX-License-Identifier: MIT
+
+source /container/base/functions/container/init
+prepare_service 10-clamd
+SERVICE_NAME="clamd"
+
+check_container_initialized
+check_service_initialized init
+
+clamd_parse_args
+
+liftoff
+
+print_start "Starting ClamAV ${CLAMAV_VERSION/clamav-/} daemon"
+${exec_prefix} exec clamd \
+            --config-file "${CONFIG_PATH}"/"${CLAMD_CONFIG_FILE}" \
+            --log "${LOG_PATH}"/"${LOG_FILE_CLAMD}" ${debug_arg}

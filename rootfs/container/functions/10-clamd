@@ -1,0 +1,259 @@
+# SPDX-FileCopyrightText: © 2025 Nfrastack <code@nfrastack.com>
+#
+# SPDX-License-Identifier: MIT
+
+clamd_parse_args() {
+    if var_true "${CLAMD_DEBUG_MODE}" ; then
+        debug_arg="--debug"
+    fi
+}
+
+freshclam_parse_args() {
+    if var_true "${FRESHCLAM_DEBUG_MODE}" ; then
+        debug_arg="--debug"
+    fi
+
+    if var_true "${LOG_VERBOSE}" ; then
+        log_verbose="--verbose"
+    fi
+}
+
+clamav_bootstrap_filesystem() {
+    create_folder \
+                    "${DATA_PATH},\
+                    $(dirname ${CLAMD_LOCAL_SOCKET}),\
+                    ${CLAMD_TEMP_PATH},\
+                    ${CONFIG_PATH},\
+                    ${DEFINITIONS_PATH},\
+                    ${LOG_PATH}" \
+                    clamav:clamav 755
+
+    rm -rf /var/lib/clamav
+    ln -sf "${DEFINITIONS_PATH}" /var/lib/clamav
+}
+
+clamav_configure_logging() {
+    case "${LOG_TYPE,,}" in
+        file | both)
+            create_logrotate clamav "${LOG_PATH}"/"${LOG_FILE_CLAMD}" clamav clamav clamav
+            create_logrotate clamav "${LOG_PATH}"/"${LOG_FILE_FRESHCLAM}" clamav clamav clamav
+        ;;
+    esac
+}
+
+clamd_generate_configuration() {
+    clamd_parse_args
+    truefalse_yesno ALERT_BROKEN_EXECUTABLES
+    truefalse_yesno ALERT_BROKEN_MEDIA
+    truefalse_yesno ALERT_ENCRYPTED_ARCHIVE
+    truefalse_yesno ALERT_ENCRYPTED_DOC
+    truefalse_yesno ALERT_EXCEEDS_MAX
+    truefalse_yesno ALERT_HEURISTIC
+    truefalse_yesno ALERT_OLE2_MACROS
+    truefalse_yesno ALERT_PARTITION_INTERSECTION
+    truefalse_yesno ALERT_PHISHING_CLOAK
+    truefalse_yesno ALERT_PHISHING_SSL_MISMATCH
+    truefalse_yesno DISABLE_CERT_CHECK
+    truefalse_yesno ENABLE_ALGORITHMIC_DETECTION
+    truefalse_yesno ENABLE_BYTECODE
+    truefalse_yesno ENABLE_CACHE
+    truefalse_yesno ENABLE_DETECT_PUA
+    truefalse_yesno ENABLE_PHISHING_SCAN_URLS
+    truefalse_yesno ENABLE_PHISHING_SIGNATURES
+    truefalse_yesno ENABLE_STRUCTURED_DATA_DETECTION
+    truefalse_yesno FOLLOW_DIRECTORY_SYMLINKS
+    truefalse_yesno FOLLOW_FILE_SYMLINKS
+    truefalse_yesno HEURISTIC_SCAN_PRECEDENCE
+    truefalse_yesno LOG_EXTENDED_INFO
+    truefalse_yesno LOG_VERBOSE
+    truefalse_yesno OLE2_BLOCK_MACROS
+    truefalse_yesno SCAN_ARCHIVE
+    truefalse_yesno SCAN_HWP3
+    truefalse_yesno SCAN_IMAGES
+    truefalse_yesno SCAN_IMAGES_FUZZY_HASH
+    truefalse_yesno SCAN_ONENOTE
+    truefalse_yesno SCAN_XMLDOCS
+    truefalse_yesno SCAN_ELF
+    truefalse_yesno SCAN_HTML
+    truefalse_yesno SCAN_MAIL
+    truefalse_yesno SCAN_OLE2
+    truefalse_yesno SCAN_PDF
+    truefalse_yesno SCAN_PE
+    truefalse_yesno SCAN_SWF
+
+    if [ "${ENABLE_CACHE,,}" = "yes" ] ; then
+        disable_cache="no"
+    else
+        disable_cache="yes"
+    fi
+
+    if [ -n "${ALERT_SCRIPT}" ]; then
+        if [ -x "${ALERT_SCRIPT}" ] ; then
+            virus_event_script="VirusEvent ${ALERT_SCRIPT}"
+        else
+            print_error "The script specified in ALERT_SCRIPT='${ALERT_SCRIPT}' does not exist or is not executable"
+            exit 1
+        fi
+    fi
+
+    exclude_pua_array=$(echo "$EXCLUDE_PUA" | tr "," "\n")
+        for pua in $exclude_pua_array; do
+            excluded_pua=${excluded_pua}$(cat <<EOF
+
+ExcludePUA              ${pua}
+EOF
+        )
+    done
+
+    include_pua_array=$(echo "$INCLUDE_PUA" | tr "," "\n")
+        for pua in $include_pua_array; do
+            included_pua=${included_pua}$(cat <<EOF
+
+IncludePUA              ${pua}
+EOF
+        )
+    done
+
+    print_notice "Generating Configuration for Clam Antivirus"
+    cat <<EOF | silent sudo -u clamav tee "${CONFIG_PATH}"/"${CLAMD_CONFIG_FILE}"
+## Custom Generated ${IAMGE_NAME} Clam Antivirus Configuration! Do not edit, instead set ENV Vars
+## If you want to use your own configuration files set CLAMAV_SETUP_TYPE=MANUAL when starting container
+## Last Generated on $(TZ=${TIMEZONE} date +'%Y-%m-%d %H:%M:%S %Z')
+
+###############
+# General
+###############
+
+User                        clamav
+Foreground                  yes
+PidFile                     $(dirname "${CLAMD_LOCAL_SOCKET}")/clamd.pid
+LocalSocket                 ${CLAMD_LOCAL_SOCKET}
+TCPSocket                   ${LISTEN_PORT}
+DatabaseDirectory           ${DEFINITIONS_PATH}
+TemporaryDirectory          ${CLAMD_TEMP_PATH}
+
+###############
+# Logging
+###############
+LogFileUnlock               yes
+LogTime                     yes
+LogVerbose                  ${LOG_VERBOSE}
+ExtendedDetectionInfo       ${LOG_EXTENDED_INFO}
+
+###############
+# Performance
+###############
+
+DisableCertCheck            ${DISABLE_CERT_CHECK}
+SelfCheck                   ${SELFCHECK_INTERVAL}
+DisableCache                ${disable_cache}
+CacheSize                   ${CACHE_SIZE}
+ConcurrentDatabaseReload    ${CONCURRENT_DATABASE_RELOAD}
+MaxThreads                  ${MAX_THREADS}
+MaxConnectionQueueLength    ${MAX_CONNECTION_QUEUE_LENGTH}
+MaxScanTime                 ${MAX_SCAN_TIME}
+MaxQueue                    ${MAX_QUEUE}
+ReadTimeout                 ${TIMEOUT_READ}
+CommandReadTimeout          ${TIMEOUT_COMMAND_READ}
+IdleTimeout                 ${TIMEOUT_IDLE}
+SendBufTimeout              ${TIMEOUT_SEND_BUF}
+
+###############
+# Results
+###############
+
+AlgorithmicDetection        ${ENABLE_ALGORITHMIC_DETECTION}
+Bytecode                    ${ENABLE_BYTECODE}
+DetectPUA                   ${ENABLE_DETECT_PUA}
+${excluded_pua}
+${included_pua}
+OLE2BlockMacros             ${OLE2_BLOCK_MACROS}
+
+###############
+# Scan
+###############
+
+PhishingScanURLs            ${ENABLE_PHISHING_SCAN_URLS}
+PhishingSignatures          ${ENABLE_PHISHING_SIGNATURES}
+ScanArchive                 ${SCAN_ARCHIVE}
+ScanELF                     ${SCAN_ELF}
+ScanHTML                    ${SCAN_HTML}
+ScanHWP3                    ${SCAN_HWP3}
+ScanImage                   ${SCAN_IMAGES}
+ScanImageFuzzyHash          ${SCAN_IMAGES_FUZZY_HASH}
+ScanMail                    ${SCAN_MAIL}
+ScanOLE2                    ${SCAN_OLE2}
+ScanOneNote                 ${SCAN_ONENOTE}
+ScanPDF                     ${SCAN_PDF}
+ScanPE                      ${SCAN_PE}
+ScanSWF                     ${SCAN_SWF}
+ScanXMLDOCS                 ${SCAN_XMLDOCS}
+StructuredDataDetection     ${ENABLE_STRUCTURED_DATA_DETECTION}
+
+###############
+# Scan Options
+###############
+
+FollowDirectorySymlinks     ${FOLLOW_DIRECTORY_SYMLINKS}
+FollowFileSymlinks          ${FOLLOW_FILE_SYMLINKS}
+HeuristicScanPrecedence     ${HEURISTIC_SCAN_PRECEDENCE}
+MaxDirectoryRecursion       ${MAX_DIRECTORY_RECURSION}
+MaxEmbeddedPE               ${MAX_EMBEDDEDPE}
+MaxFileSize                 ${MAX_FILE_SIZE}
+MaxFiles                    ${MAX_FILES}
+MaxHTMLNoTags               ${MAX_HTMLNOTAGS}
+MaxHTMLNormalize            ${MAX_HTMLNORMALIZE}
+MaxIconsPE                  ${MAX_ICONSPE}
+MaxPartitions               ${MAX_PARTITIONS}
+MaxRecHWP3                  ${MAX_RECHWP3}
+MaxRecursion                ${MAX_RECURSION}
+MaxScanSize                 ${MAX_SCAN_SIZE}
+MaxScriptNormalize          ${MAX_SCRIPTNORMALIZE}
+MaxZipTypeRcg               ${MAX_ZIPTYPERCG}
+PCREMatchLimit              ${PCRE_MATCH_LIMIT}
+PCREMaxFileSize             ${PCRE_MAX_FILE_SIZE}
+PCRERecMatchLimit           ${PCRE_RECMATCH_LIMIT}
+StreamMaxLength             ${STREAM_MAX_LENGTH}
+
+###############
+# Alert Options
+###############
+
+AlertBrokenExecutables      ${ALERT_BROKEN_EXECUTABLES}
+AlertBrokenMedia            ${ALERT_BROKEN_MEDIA}
+AlertEncryptedArchive       ${ALERT_ENCRYPTED_ARCHIVE}
+AlertEncryptedDoc           ${ALERT_ENCRYPTED_DOC}
+AlertExceedsMax             ${ALERT_EXCEEDS_MAX}
+AlertOLE2Macros             ${ALERT_OLE2_MACROS}
+AlertPartitionIntersection  ${ALERT_PARTITION_INTERSECTION}
+AlertPhishingCloak          ${ALERT_PHISHING_CLOAK}
+AlertPhishingSSLMismatch    ${ALERT_PHISHING_SSL_MISMATCH}
+HeuristicAlerts             ${ALERT_HEURISTIC}
+${virus_event_script}
+EOF
+
+    echo "alias clamscan='clamscan -d ${DEFINITIONS_PATH}'" > /root/.bashrc
+}
+
+
+
+freshclam_generate_configuration() {
+    print_notice "Generating Configuration for Freshclam definitions updater"
+    if [ -n "${FRESHCLAM_DATABASES}" ] ; then
+        custom_db=$(echo "${FRESHCLAM_DATABASES}" | tr "," "\n" | sed -e 's/^/DatabaseCustomURL /')
+    fi
+
+    cat <<EOF | silent sudo -u clamav tee "${CONFIG_PATH}"/"${FRESHCLAM_CONFIG_FILE}"
+## Custom Generated ${IMAGE_NAME} Freshclam Configuration! Do not edit, instead set ENV Vars
+## If you want to use your own configuration files set FRESHCLAM_SETUP_TYPE=MANUAL when starting container
+## Last Generated on $(date)
+
+DatabaseOwner               clamav
+PidFile                     $(dirname "${CLAMD_LOCAL_SOCKET}")/freshclam.pid
+DatabaseDirectory           ${DEFINITIONS_PATH}
+DatabaseMirror              database.clamav.net
+ScriptedUpdates             yes
+LogTime                     yes
+${custom_db}
+EOF
+}
