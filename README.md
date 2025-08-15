@@ -47,27 +47,40 @@ To unlock advanced features, one must provide a code to be able to change specif
 
 To get access to the image use your container orchestrator to pull from the following locations:
 
+
+### Prebuilt Images
+Feature limited builds of the image are available on the [Github Container Registry](https://github.com/nfrastack/container-clamav/pkgs/container/container-clamav) and [Docker Hub](https://hub.docker.com/r/nfrastack/clamav).
+
+To unlock advanced features, one must provide a code to be able to change specific environment variables from defaults. Support the development to gain access to a code.
+
+To get access to the image use your container orchestrator to pull from the following locations:
+
 ```
 ghcr.io/nfrastack/container-clamav:(image_tag)
 docker.io/nfrastack/clamav:(image_tag)
 ```
 
 Image tag syntax is:
-- <image>:<optional tag>-<optional_distribution>_<optional_distribution_variant>
+
+`<image>:<optional tag>-<optional_distribution>_<optional_distribution_variant>`
 
 Example:
-         - `ghcr.io/nfrastack/container-clamav:latest` or
-         - `ghcr.io/nfrastack/container-clamav:1.0` or
-         - `ghcr.io/nfrastack/container-clamav:1.0-alpine` or
-         - `ghcr.io/nfrastack/container-clamav:alpine` or
-         - `ghcr.io/nfrastack/container-clamav:debian`
+
+`ghcr.io/nfrastack/container-clamav:latest` or
+
+`ghcr.io/nfrastack/container-clamav:1.0` or
+
+`ghcr.io/nfrastack/container-clamav:1.0-alpine` or
+
+`ghcr.io/nfrastack/container-clamav:alpine`
 
 * `latest` will be the most recent commit
 * An otpional `tag` may exist that matches the [CHANGELOG](CHANGELOG.md) - These are the safest
 * If it is built for multiple distributions there may exist a value of `alpine` or `debian`
 * If there are multiple distribution variations it may include a version - see the registry for availability
 
-Have a look at the container registries see what tags are available.
+Have a look at the container registries and see what tags are available.
+
 
 #### Multi-Architecture Support
 
